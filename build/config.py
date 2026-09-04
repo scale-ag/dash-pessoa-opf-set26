@@ -1,77 +1,76 @@
 # -*- coding: utf-8 -*-
 """
-Configuração do cliente — preencha todos os campos abaixo.
+Configuração do cliente — FERNANDO PESSOA / Operação da Prova à Farda.
 
-Este é o ÚNICO arquivo que você precisa editar para colocar um cliente novo
-no ar — nada mais no projeto precisa mudar. Depois de editar, teste
-localmente:
+Este é o ÚNICO arquivo que precisa ser editado para ajustar o funil deste
+cliente. Depois de editar, teste localmente:
 
     python build/build.py --meta-file meta.csv --sales-file sales.csv --out dist/index.html
 
-`build/config.example.py` é uma cópia intacta deste arquivo, para consulta
-ou para restaurar `config.py` caso precise começar do zero de novo.
+`build/config.example.py` é a cópia intacta do modelo, para consulta.
 """
 from __future__ import annotations
 
 # ==========================================================================
-# 1) PLANILHA DO CLIENTE (Google Sheets)
+# 1) PLANILHAS DO CLIENTE (Google Sheets)
 # ==========================================================================
-# Meta Ads e Compradores ficam na MESMA planilha (mudam só os gids).
-# SPREADSHEET_ID: o trecho entre /d/ e /edit na URL da planilha
-#   (https://docs.google.com/spreadsheets/d/<SPREADSHEET_ID>/edit#gid=...)
-# GID_META / GID_SALES: o número depois de "gid=" na URL de cada aba.
-# A planilha precisa estar com o link público em modo "Qualquer pessoa com
-# o link pode visualizar" (o build lê via export CSV, somente leitura).
-SPREADSHEET_ID = ""   # ex.: "1AbCdEfGhIjKlMnOpQrStUvWxYz0123456789abcdefg"
-GID_META = ""          # ex.: "111111111"  (aba Meta Ads)
-GID_SALES = ""         # ex.: "222222222"  (aba Compradores)
+# Este cliente usa DUAS planilhas separadas (o template padrão assume uma só,
+# com dois gids). SPREADSHEET_ID_SALES cobre esse caso: quando vazio, o build
+# lê as duas abas da mesma planilha do Meta (comportamento original).
+#
+# Meta Ads:     https://docs.google.com/spreadsheets/d/1BLv_PQ3eHD0hPQjUckx5SkkUTpHLaU-ODAHWA_biKpU/
+# Compradores:  https://docs.google.com/spreadsheets/d/1DXw8stvgyBo7AO-7hf2TSX1nt34v7yroJHmfge3bnPI/
+# Ambas lidas via export CSV público — SOMENTE LEITURA, o build nunca escreve.
+SPREADSHEET_ID = "1BLv_PQ3eHD0hPQjUckx5SkkUTpHLaU-ODAHWA_biKpU"
+SPREADSHEET_ID_SALES = "1DXw8stvgyBo7AO-7hf2TSX1nt34v7yroJHmfge3bnPI"
+GID_META = "0"                      # aba Meta Ads (9 colunas)
+GID_SALES = "151354425"              # aba BASE COMPLETA (55 colunas)
 
 # ==========================================================================
 # 2) REGRAS DE NEGÓCIO
 # ==========================================================================
-# Fator de imposto aplicado sobre o gasto do Meta Ads quando o toggle
-# "Imposto Meta" estiver ligado na dashboard. Use 1.0 se o cliente não tiver
-# imposto a considerar.
-TAX_FACTOR = 1.0   # ex.: 1.13806 (equivale a +13,806%)
+# Fator de imposto sobre o gasto do Meta Ads (toggle "Imposto Meta" na topbar).
+TAX_FACTOR = 1.13806   # +13,806%
 
-# Produto principal do funil (base de Vendas/CAC/ConvCHK/Ticket). Casamento
-# por PREFIXO, sem acento e em minúsculas, sobre o nome do produto que
-# aparece na coluna "Produto" da planilha de Compradores.
-MAIN_PRODUCT_PREFIX = ""   # ex.: "nome do produto" (produto "Nome do Produto")
+# Produto principal do funil. O match é por PREFIXO sobre o nome NORMALIZADO
+# (sem acento, minúsculas) da coluna PRODUTO — por isso o valor abaixo também
+# precisa estar sem acento e em minúsculas.
+# Na planilha, PRODUTO = "OPERAÇÃO DA PROVA À FARDA" em 100% das linhas.
+MAIN_PRODUCT_PREFIX = "operacao da prova a farda"
 
-# A planilha de Compradores tem uma coluna de status de pagamento confiável
-# (ex.: "pago"/"aprovado" vs. "aberto"/"cancelado")? Se SIM, deixe False e o
-# build filtra por is_paid(). Se a planilha é uma lista de COMPRADORES onde
-# toda linha já é uma compra concretizada (sem coluna de status utilizável),
-# deixe True para contar todas as linhas como venda paga.
+# A aba BASE COMPLETA não tem coluna de status de pagamento — toda linha já é
+# uma inscrição paga (ingresso do evento). Por isso True.
 COUNT_ALL_AS_PAID = True
 
 # ==========================================================================
 # 3) RÓTULOS EXIBIDOS NA INTERFACE
 # ==========================================================================
-CLIENT_NAME = ""    # ex.: "Nome do Cliente" — aparece no topo do menu lateral
-CLIENT_SUB = ""     # ex.: "VSL Nome do Funil" — subtítulo abaixo do nome
-TAX_LABEL = ""       # ex.: "Imposto Meta ×1,13806" — rótulo do toggle de imposto
-MAIN_PRODUCT = ""    # ex.: "Nome do Produto" — nome de exibição do produto principal
+CLIENT_NAME = "FERNANDO PESSOA"
+CLIENT_SUB = "OPERAÇÃO DA PROVA À FARDA"
+TAX_LABEL = "Imposto Meta ×1,13806"
+MAIN_PRODUCT = "Operação da Prova à Farda"
 
 # ==========================================================================
 # 4) METAS (aba Relatórios) — código de cor de CAC/ROAS
 # ==========================================================================
 #   • ROAS: quanto MAIOR, melhor  -> desempenho = roas / ROAS_TARGET
 #   • CAC : quanto MENOR, melhor  -> desempenho = CAC_TARGET / cac
-# Faixas de cor (sobre o desempenho): <REPORT_BAND_LOW vermelho ·
-#   REPORT_BAND_LOW–0.99 amarelo · 1.00–REPORT_BAND_HIGH verde ·
-#   ≥REPORT_BAND_HIGH azul-ciano.
-CAC_TARGET = 0.0     # CAC alvo (R$ por venda do produto principal)
-ROAS_TARGET = 0.0    # ROAS alvo (Faturamento / Gasto)
+# Faixas: <REPORT_BAND_LOW vermelho · até 0,99 amarelo · até REPORT_BAND_HIGH
+# verde · acima disso azul-ciano.
+#
+# PROVISÓRIO — alinhar com o gestor. Critério usado: break-even no front-end,
+# ou seja, CAC alvo = ticket líquido do lote atual do ingresso (R$ 39,33) e
+# ROAS alvo = 1,00. Num lançamento pago o resultado real vem do back-end
+# (Mentoria Elite), que não está nesta planilha; se a meta for adquirir
+# inscrito no prejuízo controlado, suba o CAC_TARGET e baixe o ROAS_TARGET.
+CAC_TARGET = 39.33
+ROAS_TARGET = 1.00
 REPORT_BAND_LOW = 0.70
 REPORT_BAND_HIGH = 1.30
 
 # ==========================================================================
 # 5) IA INSIGHTS (Cloudflare Worker) — ver SETUP-IA.md
 # ==========================================================================
-# URL pública do Worker (não é secreta — o navegador chama esse endereço
-# para ler/gerar insights). Deixe em branco até publicar o Worker (passo 7-10
-# do checklist em CLAUDE.md); a aba IA Insights simplesmente fica
-# indisponível enquanto este campo estiver vazio.
-IA_WORKER_URL = ""   # ex.: "https://SEU-WORKER.SEU-SUBDOMINIO.workers.dev"
+# Vazio = aba IA Insights indisponível. Preencher depois de publicar o Worker
+# (passos 7-10 do checklist em CLAUDE.md).
+IA_WORKER_URL = ""

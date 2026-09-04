@@ -1,19 +1,22 @@
-# Dashboard de Controle de Tráfego Pago (VSL/Tráfego Direto) — TEMPLATE
+# Dashboard de Controle de Tráfego Pago — FERNANDO PESSOA / Operação da Prova à Farda
 
-> Este repositório é um **template reutilizável**. Ele ainda não está configurado
-> para nenhum cliente — siga o guia abaixo (ou o **CHECKLIST DE NOVO CLIENTE** no
-> topo do `CLAUDE.md`) para colocar um dashboard no ar em ~15-20 minutos.
+> Repositório **já configurado** para o cliente FERNANDO PESSOA (funil
+> "Operação da Prova à Farda", sigla de campanha `OPF-SET26`).
+> Os valores do cliente ficam em `build/config.py`; a engine
+> (`build/build.py`, `build/template.html`, `ia-worker/worker.js`) continua
+> genérica. Publicado em https://scale-ag.github.io/dash-pessoa-opf-set26/
 
 ## Visão geral
 
 Dashboard de BI estática (HTML/CSS/JS + Chart.js via CDN) publicada no **GitHub
 Pages**, que cruza o gerenciador **Meta Ads** com uma lista de **Compradores**
-(duas abas de uma planilha Google Sheets) e se atualiza sozinha a cada ~30 min
+(neste cliente, **duas planilhas Google Sheets separadas**) e se atualiza sozinha a cada ~30 min
 (build na nuvem via GitHub Actions, disparado pelo cron-job.org). **Somente
 leitura** das planilhas — o dashboard nunca escreve nelas.
 
-Funil coberto: **VSL / tráfego direto** (sem etapa de Leads/MQL) —
+Funil coberto: **lançamento pago / tráfego direto** (sem etapa de Leads/MQL) —
 `Gasto → Impressões → Cliques → Page Views → Checkouts → Vendas → Faturamento`.
+Produto principal: **Operação da Prova à Farda** (ingresso do evento).
 
 Como funciona, por dentro:
 

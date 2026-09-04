@@ -26,6 +26,9 @@ from __future__ import annotations
 # A planilha precisa estar com o link público em modo "Qualquer pessoa com
 # o link pode visualizar" (o build lê via export CSV, somente leitura).
 SPREADSHEET_ID = ""   # ex.: "1AbCdEfGhIjKlMnOpQrStUvWxYz0123456789abcdefg"
+# Opcional: se a lista de Compradores estiver em OUTRA planilha, coloque o ID
+# dela aqui. Vazio = Compradores na mesma planilha do Meta Ads (padrão).
+SPREADSHEET_ID_SALES = ""
 GID_META = ""          # ex.: "111111111"  (aba Meta Ads)
 GID_SALES = ""         # ex.: "222222222"  (aba Compradores)
 

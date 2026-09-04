@@ -1,8 +1,8 @@
 # CLAUDE.md — Dashboard de Controle de Tráfego Pago (TEMPLATE)
 
 > Este arquivo é lido automaticamente pelo Claude Code ao abrir o repositório.
-> Este é o repositório **TEMPLATE**, genérico — ainda não configurado para
-> nenhum cliente. A engine (`build/template.html`, `build/build.py`,
+> Repositório **configurado para o cliente FERNANDO PESSOA** (funil "Operação
+> da Prova à Farda", sigla `OPF-SET26`). A engine (`build/template.html`, `build/build.py`,
 > `ia-worker/worker.js`) é genérica e não deve ser editada por cliente; os
 > valores do cliente ficam em **`build/config.py`** (config do funil) e
 > **`config.js`** (metadados de publicação no GitHub). Veja também `README.md`
@@ -80,33 +80,83 @@ disparado pelo cron-job.org). **Somente leitura** das planilhas.
 
 ## Fontes de dados (Google Sheets)
 
-> Preencha esta seção com os dados da planilha real do cliente depois de
-> configurar `build/config.py` (item 2 do checklist).
+Este cliente usa **duas planilhas separadas** (o template padrão assume uma só,
+com dois gids). Por isso `build/config.py` tem `SPREADSHEET_ID_SALES` além de
+`SPREADSHEET_ID`; quando `SPREADSHEET_ID_SALES` está vazio, o build volta ao
+comportamento original (as duas abas na mesma planilha). Leitura via export CSV,
+**somente leitura**.
 
-Spreadsheet ID: preenchido em `SPREADSHEET_ID` (`build/config.py`) — as duas abas
-abaixo ficam, por padrão, na mesma planilha (leitura via export CSV).
+| Fonte | Planilha (`SPREADSHEET_ID*`) | gid | Aba |
+|-------|------------------------------|-----|-----|
+| **Meta Ads** | `1BLv_PQ3eHD0hPQjUckx5SkkUTpHLaU-ODAHWA_biKpU` | `0` | 1ª aba (9 colunas) |
+| **Compradores** | `1DXw8stvgyBo7AO-7hf2TSX1nt34v7yroJHmfge3bnPI` | `151354425` | **BASE COMPLETA** (55 colunas) |
 
-| Aba | gid | Colunas usadas (exemplo — ajuste à planilha real) |
-|-----|-----|----------------|
-| **Meta Ads** | `GID_META` | Day · Campaign Name · Ad Set Name · Ad Name · Amount Spent · Impressions · Link Clicks · Landing Page Views · Checkouts Initiated |
-| **Compradores** | `GID_SALES` | Produto · Nome · Email · Data · Valor · **Faturamento** (se houver) · utm_source · utm_medium · utm_content · utm_term · utm_campaign · Status · … |
+⚠️ Na planilha de Compradores, `gid=0` é uma aba **vazia** (13 colunas, 0 linhas).
+A aba de dados é a `151354425`. As outras abas (`152695175`, `225612892`) são
+listas parciais/respostas de formulário e **não** devem ser usadas.
 
-**Pontos de atenção ao configurar um cliente novo** (verifique contra a planilha real):
-- **Coluna de receita**: por padrão o alias de `val` prioriza `faturamento` sobre
-  `valor` (`header_index` em `build/build.py`) — confirme qual coluna representa o
-  valor líquido/bruto correto para este cliente e ajuste o alias se necessário.
-- **Coluna de status de pagamento**: se a planilha tiver uma coluna confiável de
-  status pago/aprovado, deixe `COUNT_ALL_AS_PAID = False` em `build/config.py`
-  (o build filtra por `is_paid()`). Se for uma lista de compradores onde toda
-  linha já é uma compra concretizada, deixe `True`.
-- **Identificador do anúncio**: confirme em qual coluna UTM o cliente manda o
-  nome do anúncio (`Ad Name` real do Meta) — muitas vezes é `UTM Content`, não
-  `UTM Term` (que costuma carregar o *posicionamento*: Reels/Feed/Stories). O
-  match Meta↔venda deve usar essa coluna.
+**Colunas reais — Meta Ads** (ordem diferente do template; o `header_index` casa
+por nome, então a ordem não importa):
+`Day · Campaign Name · Ad Set Name · Ad Name · Impressions · Link Clicks ·
+Landing Page Views · Checkouts Initiated · Amount Spent`
+
+**Colunas reais — BASE COMPLETA** (55 colunas; as usadas pelo build):
+`DATA` (índice 0) · `HORA` · `PRODUTO` (2) · `PAGINA` · `FORM` · `NOME` (5) ·
+`EMAIL` (6) · `ZAP` · `utm_source` (8) · `utm_medium` (9) · `utm_campaign` (10) ·
+`utm_term` (11) · `utm_content` (12) · `Order Bump?` · **`Faturamento líquido`**
+(14, coluna de receita) · `Carimbo de data/hora` · e mais ~39 colunas de
+perguntas do formulário de captação.
+
+### Pontos de atenção deste cliente (verificados na planilha em 04/09/2026)
+
+1. **UTMs praticamente vazias**: apenas **1 de 119** linhas tem UTM preenchida, e
+   nela o `utm_content` é a macro não substituída `{{adset.name}}`
+   (`utm_campaign=bio`, `utm_medium=organic`). Como o match Meta↔venda exige
+   `utm_campaign`+`utm_content` batendo com uma linha real do Meta, **nenhuma
+   venda é atribuída ao tráfego pago**: a aba Meta Ads mostra gasto sem vendas, e
+   as vendas caem em `(sem campanha)`. Não é bug do build — é rastreamento
+   faltando no checkout. **Corrigir na origem**: passar as UTMs do Meta para o
+   checkout (`utm_campaign={{campaign.name}}`, `utm_content={{ad.name}}`; note
+   que a macro correta para o anúncio é `ad.name`, não `adset.name`).
+2. **Janelas de data quase sem sobreposição**: o Meta Ads começa em 03/09/2026 e
+   a BASE COMPLETA vai de 13/08 a 03/09/2026 — a maior parte das inscrições é
+   anterior ao início do tráfego exportado. Enquanto isso durar, CAC/ROAS por
+   período comparam gasto e vendas de janelas diferentes.
+3. **Sem coluna de status de pagamento** → `COUNT_ALL_AS_PAID = True` (toda linha
+   da BASE COMPLETA é uma inscrição paga).
+4. **Receita**: usar `Faturamento líquido`. Os valores mudam por lote do ingresso
+   (8,56 → 17,12 → 19,66 → 39,33 líquidos), não por comprador — confirmar com o
+   gestor se é receita líquida do ingresso antes de bater metas.
+5. **Sem coluna de permalink do criativo** na aba Meta Ads → o Top/Piores anúncios
+   da aba Relatórios aparece **sem link** para o criativo. Para ativar, basta
+   acrescentar a coluna `Creative Instagram Permalink` na planilha do Meta.
+6. **Alias de e-mail**: existem duas colunas de e-mail (`EMAIL`, índice 6, e
+   `Endereço de e-mail`, índice 16). O alias `"e-mail"` do `build.py` casa com a
+   16 (a 6 se chama `EMAIL`, sem hífen), que só tem 45 de 119 linhas — a coluna
+   e-mail da tabela de Vendas fica vazia (`—`) no restante. É cosmético: o e-mail
+   é mascarado de qualquer forma antes de ir para a página pública.
+7. **Colunas resíduo de outro funil**: a BASE COMPLETA carrega perguntas de um
+   formulário antigo ("Curso Prático de Gestão de Projetos Digitais", "FORMAÇÃO
+   GESTORA PRÓSPERA"), todas vazias. Ignoradas pelo build.
+
+### Sigla do funil / convenção de campanha
+
+Campanha única no período sondado:
+`OPF-SET26 | E4-VEN | P1-QUENTE | VND | ABO | 2026-09-03 | Teste de criativos`
+→ **sigla do funil = `OPF-SET26`**. Anúncios no padrão
+`AD02_ING_VD_ST_LXPAGO.SET26.mov` (AD02/03/04/07/09); conjuntos no padrão
+`AUTO | ALL | 25 a 54 | BR | All in one | NN`.
+
+### Critério de MQL
+
+O briefing original citava MQL ("ser terapeuta familiar e faturar acima de 5 mil"),
+mas esse critério é de **outro cliente** — o formulário desta operação pergunta
+sobre concursos/carreira policial, e o funil aqui não tem etapa de Leads/MQL.
+Por decisão do gestor, **não há etapa de MQL nesta dashboard**.
 
 URL de export CSV: `https://docs.google.com/spreadsheets/d/{SPREADSHEET_ID}/export?format=csv&gid={GID}`
 
-### Métricas do funil VSL (`build.py` + `template.html`)
+### Métricas do funil (`build.py` + `template.html`)
 `Gasto → Impressões → Cliques → Page Views → Checkouts → Vendas → Faturamento`
 
 Gasto · Impressões · CPM · Cliques · CPC · CTR · Page Views · CPV · CR (Cliques/PageViews) ·
