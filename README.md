@@ -91,10 +91,10 @@ normalmente você não precisa mexer em nada manualmente. Para conferir/forçar:
    **Actions** → workflow **"Build & Deploy Dashboard"** → **Run workflow**
    (branch `main`).
 4. Depois do primeiro deploy bem-sucedido, a URL pública aparece em **Settings
-   → Pages** e é sempre `https://<GITHUB_USERNAME>.github.io/<GITHUB_REPOSITORY>/`.
+   → Pages** e é sempre `https://scale-ag.github.io/dash-pessoa-opf-set26/`.
 5. Configure o cron-job.org para dar continuidade aos builds automáticos a cada
    30 min — passo a passo completo em **`SETUP-CRON.md`** (ele já vem com
-   placeholders `<GITHUB_USERNAME>`/`<GITHUB_REPOSITORY>` para você substituir
+   placeholders `scale-ag`/`dash-pessoa-opf-set26` para você substituir
    pelos valores do seu `config.js`).
 
 ## Como configurar a planilha/API (Google Sheets)
@@ -163,7 +163,7 @@ Passo a passo:
 1. `cp config.example.js config.js`.
 2. Preencha `GITHUB_USERNAME`, `GITHUB_REPOSITORY` e `PROJECT_NAME`.
 3. Use esses **mesmos valores** para substituir manualmente os placeholders
-   `<GITHUB_USERNAME>` e `<GITHUB_REPOSITORY>` que aparecem em `SETUP-CRON.md`,
+   `scale-ag` e `dash-pessoa-opf-set26` que aparecem em `SETUP-CRON.md`,
    `README.md` (este arquivo) e `CLAUDE.md` — são documentos Markdown estáticos,
    então a substituição não é automática (busque pelo texto exato no
    repositório e troque em cada ocorrência).

@@ -28,7 +28,7 @@ Ordem para colocar um cliente novo no ar. Cada item aponta o arquivo e o marcado
 4. [ ] **`config.js`** (raiz do repo) — copie `config.example.js` para
    `config.js` e preencha `GITHUB_USERNAME`, `GITHUB_REPOSITORY`,
    `PROJECT_NAME`. Depois substitua manualmente os placeholders
-   `<GITHUB_USERNAME>`/`<GITHUB_REPOSITORY>` que aparecem em `SETUP-CRON.md` e
+   `scale-ag`/`dash-pessoa-opf-set26` que aparecem em `SETUP-CRON.md` e
    `README.md` pelos mesmos valores (são docs Markdown estáticos, a
    substituição não é automática).
 5. [ ] **`SETUP-CRON.md`** — depois do passo acima, gere um **token
@@ -72,7 +72,7 @@ via CDN) publicado no **GitHub Pages**, que cruza o gerenciador **Meta Ads** com
 de **Compradores** e se atualiza a cada ~30 min (build na nuvem via GitHub Actions,
 disparado pelo cron-job.org). **Somente leitura** das planilhas.
 
-- **URL pública:** `https://<GITHUB_USERNAME>.github.io/<GITHUB_REPOSITORY>/`
+- **URL pública:** `https://scale-ag.github.io/dash-pessoa-opf-set26/`
   (preencha `config.js` — ver checklist acima)
 - **Cliente/projeto:** preencher em `build/config.py` (`CLIENT_NAME`/`CLIENT_SUB`)
 - **Tipo de funil:** VSL / tráfego direto (não há etapa de Leads/MQL) —
