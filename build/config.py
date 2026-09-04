@@ -58,12 +58,14 @@ MAIN_PRODUCT = "Operação da Prova à Farda"
 # Faixas: <REPORT_BAND_LOW vermelho · até 0,99 amarelo · até REPORT_BAND_HIGH
 # verde · acima disso azul-ciano.
 #
-# PROVISÓRIO — alinhar com o gestor. Critério usado: break-even no front-end,
-# ou seja, CAC alvo = ticket líquido do lote atual do ingresso (R$ 39,33) e
-# ROAS alvo = 1,00. Num lançamento pago o resultado real vem do back-end
-# (Mentoria Elite), que não está nesta planilha; se a meta for adquirir
+# PROVISÓRIO — alinhar com o gestor. Critério: break-even no front-end. As duas
+# metas são mantidas coerentes entre si (ROAS 1,00 <=> CAC = ticket médio), com
+# base no ticket médio real do período 13/08–04/09/2026: R$ 11,43.
+# Se o ingresso passar a ser vendido só no lote atual (R$ 39,33 líquidos), suba
+# CAC_TARGET para 39.33. Num lançamento pago o resultado real vem do back-end
+# (Mentoria Elite), que não está nesta planilha: se a operação aceita adquirir
 # inscrito no prejuízo controlado, suba o CAC_TARGET e baixe o ROAS_TARGET.
-CAC_TARGET = 39.33
+CAC_TARGET = 11.43
 ROAS_TARGET = 1.00
 REPORT_BAND_LOW = 0.70
 REPORT_BAND_HIGH = 1.30
