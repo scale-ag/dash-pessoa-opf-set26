@@ -1,4 +1,4 @@
-# Ativação + configuração do cron-job.org (TEMPLATE)
+# Ativação + configuração do cron-job.org
 
 > owner/repo: `scale-ag/dash-pessoa-opf-set26` · URL do Pages:
 > `https://scale-ag.github.io/dash-pessoa-opf-set26/`. O **token
@@ -7,8 +7,19 @@
 ## Passo 1 — Colocar na branch `main` (uma vez)
 
 `workflow_dispatch` (o que o cron-job.org chama) **só existe na branch padrão**.
-Faça o merge para a `main`. Na 1ª execução o workflow habilita o GitHub Pages
-automaticamente (`actions/configure-pages` com `enablement: true`).
+Já está na `main`.
+
+⚠️ **O Pages precisa ser ligado uma vez, na mão.** O workflow tenta ligá-lo
+sozinho (`actions/configure-pages` com `enablement: true`), mas o `GITHUB_TOKEN`
+do Actions não tem permissão para **criar** o site do Pages — o passo falha com
+`Create Pages site failed: Resource not accessible by integration`. Criar o site
+exige permissão de **administração do repositório**, que o token do Actions não
+tem por design (não é questão de escopo do workflow: o passo que precisa de
+`contents: write` funciona normalmente neste repo).
+
+Ligue uma vez em **Settings → Pages → Build and deployment → Source: GitHub
+Actions** e re-execute o workflow. A partir daí todos os builds seguintes
+publicam sozinhos.
 
 URL pública após publicar: `https://scale-ag.github.io/dash-pessoa-opf-set26/`
 
@@ -41,7 +52,7 @@ A cada 30 minutos  (Every 30 minutes)
 Accept: application/vnd.github+json
 ```
 ```
-Authorization: Bearer SEU_TOKEN_AQUI
+Authorization: Bearer TOKEN_AQUI
 ```
 ```
 X-GitHub-Api-Version: 2022-11-28
