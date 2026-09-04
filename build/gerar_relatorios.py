@@ -198,8 +198,8 @@ def main():
     # Sem --meta-file/--sales-file/--xlsx: busca ao vivo via CSV público do
     # Google Sheets (mesmo caminho do build.py) — usado pelo GitHub Actions,
     # que alcança docs.google.com (o sandbox do agente não alcança).
-    meta_rows = build.load_rows(build.EXPORT_URL.format(sid=build.SPREADSHEET_ID, gid=build.GID_META), meta_file)
-    sales_rows = build.load_rows(build.EXPORT_URL.format(sid=build.SPREADSHEET_ID, gid=build.GID_SALES), sales_file)
+    meta_rows = build.load_rows(build.META_CSV_URL, meta_file)
+    sales_rows = build.load_rows(build.SALES_CSV_URL, sales_file)
     data = build.process(meta_rows, sales_rows)
     meta, sales, B = data["meta"], data["sales"], data["build"]
     tax = B["tax_factor"]  # imposto Meta aplicado (mesmo default da UI: ON)

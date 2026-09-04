@@ -50,6 +50,9 @@ if _missing:
     )
 
 SPREADSHEET_ID = cfg.SPREADSHEET_ID
+# Compradores pode estar em OUTRA planilha (cliente com 2 arquivos separados).
+# Ausente/vazio -> mesma planilha do Meta Ads (comportamento original).
+SPREADSHEET_ID_SALES = getattr(cfg, "SPREADSHEET_ID_SALES", "") or SPREADSHEET_ID
 GID_META = cfg.GID_META
 GID_SALES = cfg.GID_SALES
 TAX_FACTOR = cfg.TAX_FACTOR
@@ -66,6 +69,8 @@ REPORT_BAND_HIGH = cfg.REPORT_BAND_HIGH
 IA_WORKER_URL = cfg.IA_WORKER_URL
 
 EXPORT_URL = "https://docs.google.com/spreadsheets/d/{sid}/export?format=csv&gid={gid}"
+META_CSV_URL = EXPORT_URL.format(sid=SPREADSHEET_ID, gid=GID_META)
+SALES_CSV_URL = EXPORT_URL.format(sid=SPREADSHEET_ID_SALES, gid=GID_SALES)
 BRT = timezone(timedelta(hours=-3))   # horário de Brasília (exibição)
 
 
@@ -407,8 +412,8 @@ def main():
     ap.add_argument("--out", default="dist/index.html")
     args = ap.parse_args()
 
-    meta_rows = load_rows(EXPORT_URL.format(sid=SPREADSHEET_ID, gid=GID_META), args.meta_file)
-    sales_rows = load_rows(EXPORT_URL.format(sid=SPREADSHEET_ID, gid=GID_SALES), args.sales_file)
+    meta_rows = load_rows(META_CSV_URL, args.meta_file)
+    sales_rows = load_rows(SALES_CSV_URL, args.sales_file)
     data = process(meta_rows, sales_rows)
 
     # Briefings do Gestor (texto por IA, gerado 1x/dia pela Routine) — lidos do
