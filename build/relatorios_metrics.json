@@ -1,271 +1,55 @@
 {
-  "gerado_em": "05/09/2026 04:07",
-  "hoje": "2026-09-05",
+  "gerado_em": "06/09/2026 04:19",
+  "hoje": "2026-09-06",
   "periodo_dados": {
     "de": "2026-08-13",
-    "ate": "2026-09-05"
+    "ate": "2026-09-06"
   },
   "metas": {
     "cac": 11.43,
     "roas": 1.0
   },
-  "ticket_medio_geral": 11.43,
+  "ticket_medio_geral": 11.69,
   "periodos": {
     "hoje": {
-      "de": "2026-09-05",
-      "ate": "2026-09-05",
+      "de": "2026-09-06",
+      "ate": "2026-09-06",
       "total": {
-        "gasto": 4.06,
-        "impr": 107.0,
-        "cliques": 2.0,
-        "pv": 0.0,
-        "ck": 0.0,
-        "vendas": 0,
-        "fat": 0.0,
-        "cpm": 37.97,
-        "ctr": 0.0187,
-        "cpc": 2.03,
-        "cpv": null,
-        "cr": 0.0,
-        "cpic": null,
-        "vischk": null,
-        "convchk": null,
-        "convlp": null,
-        "cac": null,
-        "roas": 0.0,
-        "ticket": null
-      },
-      "ads": {
-        "gasto": 4.06,
-        "impr": 107.0,
-        "cliques": 2.0,
-        "pv": 0.0,
-        "ck": 0.0,
-        "vendas": 0,
-        "fat": 0.0,
-        "cpm": 37.97,
-        "ctr": 0.0187,
-        "cpc": 2.03,
-        "cpv": null,
-        "cr": 0.0,
-        "cpic": null,
-        "vischk": null,
-        "convchk": null,
-        "convlp": null,
-        "cac": null,
-        "roas": 0.0,
-        "ticket": null
-      },
-      "campanhas": [
-        {
-          "nome": "OPF-SET26 | E4-VEN | P1-QUENTE | VND | ABO | 2026-09-03 | Teste de criativos",
-          "gasto": 4.06,
-          "impr": 107.0,
-          "cliques": 2.0,
-          "pv": 0.0,
-          "ck": 0.0,
-          "vendas": 0,
-          "fat": 0.0,
-          "cpm": 37.97,
-          "ctr": 0.0187,
-          "cpc": 2.03,
-          "cpv": null,
-          "cr": 0.0,
-          "cpic": null,
-          "vischk": null,
-          "convchk": null,
-          "convlp": null,
-          "cac": null,
-          "roas": 0.0,
-          "ticket": null
-        }
-      ],
-      "top_anuncios": [
-        {
-          "nome": "AD02_ING_VD_ST_LXPAGO.SET26.mov",
-          "gasto": 1.63,
-          "vendas": 0,
-          "cac": null,
-          "roas": 0.0
-        },
-        {
-          "nome": "AD03_ING_VD_ST_LXPAGO.SET26.mov",
-          "gasto": 0.6,
-          "vendas": 0,
-          "cac": null,
-          "roas": 0.0
-        },
-        {
-          "nome": "AD04_ING_VD_ST_LXPAGO.SET26.mov",
-          "gasto": 0.31,
-          "vendas": 0,
-          "cac": null,
-          "roas": 0.0
-        },
-        {
-          "nome": "AD07_ING_VD_ST_LXPAGO.SET26.mov",
-          "gasto": 1.15,
-          "vendas": 0,
-          "cac": null,
-          "roas": 0.0
-        },
-        {
-          "nome": "AD09_ING_VD_ST_LXPAGO.SET26.mov",
-          "gasto": 0.38,
-          "vendas": 0,
-          "cac": null,
-          "roas": 0.0
-        }
-      ],
-      "piores_anuncios": []
-    },
-    "ontem": {
-      "de": "2026-09-04",
-      "ate": "2026-09-04",
-      "total": {
-        "gasto": 236.75,
-        "impr": 8901.0,
-        "cliques": 78.0,
-        "pv": 56.0,
-        "ck": 2.0,
-        "vendas": 0,
-        "fat": 0.0,
-        "cpm": 26.6,
-        "ctr": 0.0088,
-        "cpc": 3.04,
-        "cpv": 4.23,
-        "cr": 0.7179,
-        "cpic": 118.38,
-        "vischk": 0.0357,
-        "convchk": 0.0,
-        "convlp": 0.0,
-        "cac": null,
-        "roas": 0.0,
-        "ticket": null
-      },
-      "ads": {
-        "gasto": 236.75,
-        "impr": 8901.0,
-        "cliques": 78.0,
-        "pv": 56.0,
-        "ck": 2.0,
-        "vendas": 0,
-        "fat": 0.0,
-        "cpm": 26.6,
-        "ctr": 0.0088,
-        "cpc": 3.04,
-        "cpv": 4.23,
-        "cr": 0.7179,
-        "cpic": 118.38,
-        "vischk": 0.0357,
-        "convchk": 0.0,
-        "convlp": 0.0,
-        "cac": null,
-        "roas": 0.0,
-        "ticket": null
-      },
-      "campanhas": [
-        {
-          "nome": "OPF-SET26 | E4-VEN | P1-QUENTE | VND | ABO | 2026-09-03 | Teste de criativos",
-          "gasto": 236.75,
-          "impr": 8901.0,
-          "cliques": 78.0,
-          "pv": 56.0,
-          "ck": 2.0,
-          "vendas": 0,
-          "fat": 0.0,
-          "cpm": 26.6,
-          "ctr": 0.0088,
-          "cpc": 3.04,
-          "cpv": 4.23,
-          "cr": 0.7179,
-          "cpic": 118.38,
-          "vischk": 0.0357,
-          "convchk": 0.0,
-          "convlp": 0.0,
-          "cac": null,
-          "roas": 0.0,
-          "ticket": null
-        }
-      ],
-      "top_anuncios": [
-        {
-          "nome": "AD02_ING_VD_ST_LXPAGO.SET26.mov",
-          "gasto": 52.61,
-          "vendas": 0,
-          "cac": null,
-          "roas": 0.0
-        },
-        {
-          "nome": "AD03_ING_VD_ST_LXPAGO.SET26.mov",
-          "gasto": 51.76,
-          "vendas": 0,
-          "cac": null,
-          "roas": 0.0
-        },
-        {
-          "nome": "AD04_ING_VD_ST_LXPAGO.SET26.mov",
-          "gasto": 44.32,
-          "vendas": 0,
-          "cac": null,
-          "roas": 0.0
-        },
-        {
-          "nome": "AD07_ING_VD_ST_LXPAGO.SET26.mov",
-          "gasto": 46.02,
-          "vendas": 0,
-          "cac": null,
-          "roas": 0.0
-        },
-        {
-          "nome": "AD09_ING_VD_ST_LXPAGO.SET26.mov",
-          "gasto": 42.04,
-          "vendas": 0,
-          "cac": null,
-          "roas": 0.0
-        }
-      ],
-      "piores_anuncios": []
-    },
-    "3d": {
-      "de": "2026-09-03",
-      "ate": "2026-09-05",
-      "total": {
-        "gasto": 358.69,
-        "impr": 14425.0,
-        "cliques": 126.0,
-        "pv": 86.0,
-        "ck": 8.0,
+        "gasto": 6.09,
+        "impr": 181.0,
+        "cliques": 4.0,
+        "pv": 2.0,
+        "ck": 1.0,
         "vendas": 1,
         "fat": 19.66,
-        "cpm": 24.87,
-        "ctr": 0.0087,
-        "cpc": 2.85,
-        "cpv": 4.17,
-        "cr": 0.6825,
-        "cpic": 44.84,
-        "vischk": 0.093,
+        "cpm": 33.64,
+        "ctr": 0.0221,
+        "cpc": 1.52,
+        "cpv": 3.04,
+        "cr": 0.5,
+        "cpic": 6.09,
+        "vischk": 0.5,
         "convchk": 0.0,
         "convlp": 0.0,
-        "cac": 358.69,
-        "roas": 0.05,
+        "cac": 6.09,
+        "roas": 3.23,
         "ticket": 19.66
       },
       "ads": {
-        "gasto": 358.69,
-        "impr": 14425.0,
-        "cliques": 126.0,
-        "pv": 86.0,
-        "ck": 8.0,
+        "gasto": 6.09,
+        "impr": 181.0,
+        "cliques": 4.0,
+        "pv": 2.0,
+        "ck": 1.0,
         "vendas": 0,
         "fat": 0.0,
-        "cpm": 24.87,
-        "ctr": 0.0087,
-        "cpc": 2.85,
-        "cpv": 4.17,
-        "cr": 0.6825,
-        "cpic": 44.84,
-        "vischk": 0.093,
+        "cpm": 33.64,
+        "ctr": 0.0221,
+        "cpc": 1.52,
+        "cpv": 3.04,
+        "cr": 0.5,
+        "cpic": 6.09,
+        "vischk": 0.5,
         "convchk": 0.0,
         "convlp": 0.0,
         "cac": null,
@@ -275,20 +59,150 @@
       "campanhas": [
         {
           "nome": "OPF-SET26 | E4-VEN | P1-QUENTE | VND | ABO | 2026-09-03 | Teste de criativos",
-          "gasto": 358.69,
-          "impr": 14425.0,
-          "cliques": 126.0,
-          "pv": 86.0,
-          "ck": 8.0,
+          "gasto": 6.09,
+          "impr": 181.0,
+          "cliques": 4.0,
+          "pv": 2.0,
+          "ck": 1.0,
           "vendas": 0,
           "fat": 0.0,
-          "cpm": 24.87,
-          "ctr": 0.0087,
-          "cpc": 2.85,
-          "cpv": 4.17,
-          "cr": 0.6825,
-          "cpic": 44.84,
-          "vischk": 0.093,
+          "cpm": 33.64,
+          "ctr": 0.0221,
+          "cpc": 1.52,
+          "cpv": 3.04,
+          "cr": 0.5,
+          "cpic": 6.09,
+          "vischk": 0.5,
+          "convchk": 0.0,
+          "convlp": 0.0,
+          "cac": null,
+          "roas": 0.0,
+          "ticket": null
+        }
+      ],
+      "top_anuncios": [
+        {
+          "nome": "EST01",
+          "gasto": 0.42,
+          "vendas": 0,
+          "cac": null,
+          "roas": 0.0
+        },
+        {
+          "nome": "EST02",
+          "gasto": 1.09,
+          "vendas": 0,
+          "cac": null,
+          "roas": 0.0
+        },
+        {
+          "nome": "EST04",
+          "gasto": 0.41,
+          "vendas": 0,
+          "cac": null,
+          "roas": 0.0
+        },
+        {
+          "nome": "EST03",
+          "gasto": 0.34,
+          "vendas": 0,
+          "cac": null,
+          "roas": 0.0
+        },
+        {
+          "nome": "EST06",
+          "gasto": 0.22,
+          "vendas": 0,
+          "cac": null,
+          "roas": 0.0
+        }
+      ],
+      "piores_anuncios": [
+        {
+          "nome": "AD10_ING_VD_ST_LXPAGO.SET26.mov",
+          "gasto": 1.21,
+          "vendas": 0,
+          "cac": null,
+          "roas": 0.0
+        },
+        {
+          "nome": "AD05_ING_VD_ST_LXPAGO.SET26.mov",
+          "gasto": 1.67,
+          "vendas": 0,
+          "cac": null,
+          "roas": 0.0
+        },
+        {
+          "nome": "EST05",
+          "gasto": 0.73,
+          "vendas": 0,
+          "cac": null,
+          "roas": 0.0
+        }
+      ]
+    },
+    "ontem": {
+      "de": "2026-09-05",
+      "ate": "2026-09-05",
+      "total": {
+        "gasto": 231.81,
+        "impr": 9682.0,
+        "cliques": 69.0,
+        "pv": 59.0,
+        "ck": 9.0,
+        "vendas": 3,
+        "fat": 58.98,
+        "cpm": 23.94,
+        "ctr": 0.0071,
+        "cpc": 3.36,
+        "cpv": 3.93,
+        "cr": 0.8551,
+        "cpic": 25.76,
+        "vischk": 0.1525,
+        "convchk": 0.0,
+        "convlp": 0.0,
+        "cac": 77.27,
+        "roas": 0.25,
+        "ticket": 19.66
+      },
+      "ads": {
+        "gasto": 231.81,
+        "impr": 9682.0,
+        "cliques": 69.0,
+        "pv": 59.0,
+        "ck": 9.0,
+        "vendas": 0,
+        "fat": 0.0,
+        "cpm": 23.94,
+        "ctr": 0.0071,
+        "cpc": 3.36,
+        "cpv": 3.93,
+        "cr": 0.8551,
+        "cpic": 25.76,
+        "vischk": 0.1525,
+        "convchk": 0.0,
+        "convlp": 0.0,
+        "cac": null,
+        "roas": 0.0,
+        "ticket": null
+      },
+      "campanhas": [
+        {
+          "nome": "OPF-SET26 | E4-VEN | P1-QUENTE | VND | ABO | 2026-09-03 | Teste de criativos",
+          "gasto": 231.81,
+          "impr": 9682.0,
+          "cliques": 69.0,
+          "pv": 59.0,
+          "ck": 9.0,
+          "vendas": 0,
+          "fat": 0.0,
+          "cpm": 23.94,
+          "ctr": 0.0071,
+          "cpc": 3.36,
+          "cpv": 3.93,
+          "cr": 0.8551,
+          "cpic": 25.76,
+          "vischk": 0.1525,
           "convchk": 0.0,
           "convlp": 0.0,
           "cac": null,
@@ -299,81 +213,261 @@
       "top_anuncios": [
         {
           "nome": "AD02_ING_VD_ST_LXPAGO.SET26.mov",
-          "gasto": 77.83,
+          "gasto": 20.46,
           "vendas": 0,
           "cac": null,
           "roas": 0.0
         },
         {
           "nome": "AD03_ING_VD_ST_LXPAGO.SET26.mov",
-          "gasto": 76.22,
+          "gasto": 20.85,
           "vendas": 0,
           "cac": null,
           "roas": 0.0
         },
         {
           "nome": "AD04_ING_VD_ST_LXPAGO.SET26.mov",
-          "gasto": 66.1,
+          "gasto": 18.71,
           "vendas": 0,
           "cac": null,
           "roas": 0.0
         },
         {
           "nome": "AD07_ING_VD_ST_LXPAGO.SET26.mov",
-          "gasto": 73.6,
+          "gasto": 19.93,
           "vendas": 0,
           "cac": null,
           "roas": 0.0
         },
         {
           "nome": "AD09_ING_VD_ST_LXPAGO.SET26.mov",
-          "gasto": 64.95,
+          "gasto": 22.16,
           "vendas": 0,
           "cac": null,
           "roas": 0.0
         }
       ],
-      "piores_anuncios": []
+      "piores_anuncios": [
+        {
+          "nome": "AD10_ING_VD_ST_LXPAGO.SET26.mov",
+          "gasto": 26.29,
+          "vendas": 0,
+          "cac": null,
+          "roas": 0.0
+        },
+        {
+          "nome": "AD05_ING_VD_ST_LXPAGO.SET26.mov",
+          "gasto": 26.3,
+          "vendas": 0,
+          "cac": null,
+          "roas": 0.0
+        },
+        {
+          "nome": "EST05",
+          "gasto": 7.22,
+          "vendas": 0,
+          "cac": null,
+          "roas": 0.0
+        },
+        {
+          "nome": "EST06",
+          "gasto": 18.73,
+          "vendas": 0,
+          "cac": null,
+          "roas": 0.0
+        },
+        {
+          "nome": "EST03",
+          "gasto": 8.03,
+          "vendas": 0,
+          "cac": null,
+          "roas": 0.0
+        }
+      ]
+    },
+    "3d": {
+      "de": "2026-09-04",
+      "ate": "2026-09-06",
+      "total": {
+        "gasto": 474.99,
+        "impr": 18798.0,
+        "cliques": 151.0,
+        "pv": 117.0,
+        "ck": 12.0,
+        "vendas": 4,
+        "fat": 78.64,
+        "cpm": 25.27,
+        "ctr": 0.008,
+        "cpc": 3.15,
+        "cpv": 4.06,
+        "cr": 0.7748,
+        "cpic": 39.58,
+        "vischk": 0.1026,
+        "convchk": 0.0,
+        "convlp": 0.0,
+        "cac": 118.75,
+        "roas": 0.17,
+        "ticket": 19.66
+      },
+      "ads": {
+        "gasto": 474.99,
+        "impr": 18798.0,
+        "cliques": 151.0,
+        "pv": 117.0,
+        "ck": 12.0,
+        "vendas": 0,
+        "fat": 0.0,
+        "cpm": 25.27,
+        "ctr": 0.008,
+        "cpc": 3.15,
+        "cpv": 4.06,
+        "cr": 0.7748,
+        "cpic": 39.58,
+        "vischk": 0.1026,
+        "convchk": 0.0,
+        "convlp": 0.0,
+        "cac": null,
+        "roas": 0.0,
+        "ticket": null
+      },
+      "campanhas": [
+        {
+          "nome": "OPF-SET26 | E4-VEN | P1-QUENTE | VND | ABO | 2026-09-03 | Teste de criativos",
+          "gasto": 474.99,
+          "impr": 18798.0,
+          "cliques": 151.0,
+          "pv": 117.0,
+          "ck": 12.0,
+          "vendas": 0,
+          "fat": 0.0,
+          "cpm": 25.27,
+          "ctr": 0.008,
+          "cpc": 3.15,
+          "cpv": 4.06,
+          "cr": 0.7748,
+          "cpic": 39.58,
+          "vischk": 0.1026,
+          "convchk": 0.0,
+          "convlp": 0.0,
+          "cac": null,
+          "roas": 0.0,
+          "ticket": null
+        }
+      ],
+      "top_anuncios": [
+        {
+          "nome": "AD02_ING_VD_ST_LXPAGO.SET26.mov",
+          "gasto": 73.07,
+          "vendas": 0,
+          "cac": null,
+          "roas": 0.0
+        },
+        {
+          "nome": "AD03_ING_VD_ST_LXPAGO.SET26.mov",
+          "gasto": 72.79,
+          "vendas": 0,
+          "cac": null,
+          "roas": 0.0
+        },
+        {
+          "nome": "AD04_ING_VD_ST_LXPAGO.SET26.mov",
+          "gasto": 63.08,
+          "vendas": 0,
+          "cac": null,
+          "roas": 0.0
+        },
+        {
+          "nome": "AD07_ING_VD_ST_LXPAGO.SET26.mov",
+          "gasto": 66.01,
+          "vendas": 0,
+          "cac": null,
+          "roas": 0.0
+        },
+        {
+          "nome": "AD09_ING_VD_ST_LXPAGO.SET26.mov",
+          "gasto": 64.24,
+          "vendas": 0,
+          "cac": null,
+          "roas": 0.0
+        }
+      ],
+      "piores_anuncios": [
+        {
+          "nome": "AD10_ING_VD_ST_LXPAGO.SET26.mov",
+          "gasto": 27.5,
+          "vendas": 0,
+          "cac": null,
+          "roas": 0.0
+        },
+        {
+          "nome": "AD05_ING_VD_ST_LXPAGO.SET26.mov",
+          "gasto": 27.97,
+          "vendas": 0,
+          "cac": null,
+          "roas": 0.0
+        },
+        {
+          "nome": "EST05",
+          "gasto": 7.94,
+          "vendas": 0,
+          "cac": null,
+          "roas": 0.0
+        },
+        {
+          "nome": "EST06",
+          "gasto": 18.95,
+          "vendas": 0,
+          "cac": null,
+          "roas": 0.0
+        },
+        {
+          "nome": "EST03",
+          "gasto": 8.38,
+          "vendas": 0,
+          "cac": null,
+          "roas": 0.0
+        }
+      ]
     },
     "7d": {
-      "de": "2026-08-30",
-      "ate": "2026-09-05",
+      "de": "2026-08-31",
+      "ate": "2026-09-06",
       "total": {
-        "gasto": 358.69,
-        "impr": 14425.0,
-        "cliques": 126.0,
-        "pv": 86.0,
-        "ck": 8.0,
-        "vendas": 3,
-        "fat": 98.32,
-        "cpm": 24.87,
-        "ctr": 0.0087,
-        "cpc": 2.85,
-        "cpv": 4.17,
-        "cr": 0.6825,
-        "cpic": 44.84,
-        "vischk": 0.093,
+        "gasto": 592.87,
+        "impr": 24215.0,
+        "cliques": 197.0,
+        "pv": 147.0,
+        "ck": 18.0,
+        "vendas": 7,
+        "fat": 176.96,
+        "cpm": 24.48,
+        "ctr": 0.0081,
+        "cpc": 3.01,
+        "cpv": 4.03,
+        "cr": 0.7462,
+        "cpic": 32.94,
+        "vischk": 0.1224,
         "convchk": 0.0,
         "convlp": 0.0,
-        "cac": 119.56,
-        "roas": 0.27,
-        "ticket": 32.77
+        "cac": 84.7,
+        "roas": 0.3,
+        "ticket": 25.28
       },
       "ads": {
-        "gasto": 358.69,
-        "impr": 14425.0,
-        "cliques": 126.0,
-        "pv": 86.0,
-        "ck": 8.0,
+        "gasto": 592.87,
+        "impr": 24215.0,
+        "cliques": 197.0,
+        "pv": 147.0,
+        "ck": 18.0,
         "vendas": 0,
         "fat": 0.0,
-        "cpm": 24.87,
-        "ctr": 0.0087,
-        "cpc": 2.85,
-        "cpv": 4.17,
-        "cr": 0.6825,
-        "cpic": 44.84,
-        "vischk": 0.093,
+        "cpm": 24.48,
+        "ctr": 0.0081,
+        "cpc": 3.01,
+        "cpv": 4.03,
+        "cr": 0.7462,
+        "cpic": 32.94,
+        "vischk": 0.1224,
         "convchk": 0.0,
         "convlp": 0.0,
         "cac": null,
@@ -383,20 +477,20 @@
       "campanhas": [
         {
           "nome": "OPF-SET26 | E4-VEN | P1-QUENTE | VND | ABO | 2026-09-03 | Teste de criativos",
-          "gasto": 358.69,
-          "impr": 14425.0,
-          "cliques": 126.0,
-          "pv": 86.0,
-          "ck": 8.0,
+          "gasto": 592.87,
+          "impr": 24215.0,
+          "cliques": 197.0,
+          "pv": 147.0,
+          "ck": 18.0,
           "vendas": 0,
           "fat": 0.0,
-          "cpm": 24.87,
-          "ctr": 0.0087,
-          "cpc": 2.85,
-          "cpv": 4.17,
-          "cr": 0.6825,
-          "cpic": 44.84,
-          "vischk": 0.093,
+          "cpm": 24.48,
+          "ctr": 0.0081,
+          "cpc": 3.01,
+          "cpv": 4.03,
+          "cr": 0.7462,
+          "cpic": 32.94,
+          "vischk": 0.1224,
           "convchk": 0.0,
           "convlp": 0.0,
           "cac": null,
@@ -407,81 +501,117 @@
       "top_anuncios": [
         {
           "nome": "AD02_ING_VD_ST_LXPAGO.SET26.mov",
-          "gasto": 77.83,
+          "gasto": 96.67,
           "vendas": 0,
           "cac": null,
           "roas": 0.0
         },
         {
           "nome": "AD03_ING_VD_ST_LXPAGO.SET26.mov",
-          "gasto": 76.22,
+          "gasto": 96.64,
           "vendas": 0,
           "cac": null,
           "roas": 0.0
         },
         {
           "nome": "AD04_ING_VD_ST_LXPAGO.SET26.mov",
-          "gasto": 66.1,
+          "gasto": 84.56,
           "vendas": 0,
           "cac": null,
           "roas": 0.0
         },
         {
           "nome": "AD07_ING_VD_ST_LXPAGO.SET26.mov",
-          "gasto": 73.6,
+          "gasto": 92.43,
           "vendas": 0,
           "cac": null,
           "roas": 0.0
         },
         {
           "nome": "AD09_ING_VD_ST_LXPAGO.SET26.mov",
-          "gasto": 64.95,
+          "gasto": 86.78,
           "vendas": 0,
           "cac": null,
           "roas": 0.0
         }
       ],
-      "piores_anuncios": []
+      "piores_anuncios": [
+        {
+          "nome": "AD10_ING_VD_ST_LXPAGO.SET26.mov",
+          "gasto": 27.5,
+          "vendas": 0,
+          "cac": null,
+          "roas": 0.0
+        },
+        {
+          "nome": "AD05_ING_VD_ST_LXPAGO.SET26.mov",
+          "gasto": 27.97,
+          "vendas": 0,
+          "cac": null,
+          "roas": 0.0
+        },
+        {
+          "nome": "EST05",
+          "gasto": 7.94,
+          "vendas": 0,
+          "cac": null,
+          "roas": 0.0
+        },
+        {
+          "nome": "EST06",
+          "gasto": 18.95,
+          "vendas": 0,
+          "cac": null,
+          "roas": 0.0
+        },
+        {
+          "nome": "EST03",
+          "gasto": 8.38,
+          "vendas": 0,
+          "cac": null,
+          "roas": 0.0
+        }
+      ]
     },
     "14d": {
-      "de": "2026-08-23",
-      "ate": "2026-09-05",
+      "de": "2026-08-24",
+      "ate": "2026-09-06",
       "total": {
-        "gasto": 358.69,
-        "impr": 14425.0,
-        "cliques": 126.0,
-        "pv": 86.0,
-        "ck": 8.0,
-        "vendas": 10,
-        "fat": 223.6,
-        "cpm": 24.87,
-        "ctr": 0.0087,
-        "cpc": 2.85,
-        "cpv": 4.17,
-        "cr": 0.6825,
-        "cpic": 44.84,
-        "vischk": 0.093,
+        "gasto": 592.87,
+        "impr": 24215.0,
+        "cliques": 197.0,
+        "pv": 147.0,
+        "ck": 18.0,
+        "vendas": 14,
+        "fat": 302.24,
+        "cpm": 24.48,
+        "ctr": 0.0081,
+        "cpc": 3.01,
+        "cpv": 4.03,
+        "cr": 0.7462,
+        "cpic": 32.94,
+        "vischk": 0.1224,
         "convchk": 0.0,
         "convlp": 0.0,
-        "cac": 35.87,
-        "roas": 0.62,
-        "ticket": 22.36
+        "cac": 42.35,
+        "roas": 0.51,
+        "ticket": 21.59
       },
       "ads": {
-        "gasto": 358.69,
-        "impr": 14425.0,
-        "cliques": 126.0,
-        "pv": 86.0,
-        "ck": 8.0,
+        "gasto": 592.87,
+        "impr": 24215.0,
+        "cliques": 197.0,
+        "pv": 147.0,
+        "ck": 18.0,
         "vendas": 0,
         "fat": 0.0,
-        "cpm": 24.87,
-        "ctr": 0.0087,
-        "cpc": 2.85,
-        "cpv": 4.17,
-        "cr": 0.6825,
-        "cpic": 44.84,
-        "vischk": 0.093,
+        "cpm": 24.48,
+        "ctr": 0.0081,
+        "cpc": 3.01,
+        "cpv": 4.03,
+        "cr": 0.7462,
+        "cpic": 32.94,
+        "vischk": 0.1224,
         "convchk": 0.0,
         "convlp": 0.0,
         "cac": null,
@@ -491,20 +621,20 @@
       "campanhas": [
         {
           "nome": "OPF-SET26 | E4-VEN | P1-QUENTE | VND | ABO | 2026-09-03 | Teste de criativos",
-          "gasto": 358.69,
-          "impr": 14425.0,
-          "cliques": 126.0,
-          "pv": 86.0,
-          "ck": 8.0,
+          "gasto": 592.87,
+          "impr": 24215.0,
+          "cliques": 197.0,
+          "pv": 147.0,
+          "ck": 18.0,
           "vendas": 0,
           "fat": 0.0,
-          "cpm": 24.87,
-          "ctr": 0.0087,
-          "cpc": 2.85,
-          "cpv": 4.17,
-          "cr": 0.6825,
-          "cpic": 44.84,
-          "vischk": 0.093,
+          "cpm": 24.48,
+          "ctr": 0.0081,
+          "cpc": 3.01,
+          "cpv": 4.03,
+          "cr": 0.7462,
+          "cpic": 32.94,
+          "vischk": 0.1224,
           "convchk": 0.0,
           "convlp": 0.0,
           "cac": null,
@@ -515,81 +645,117 @@
       "top_anuncios": [
         {
           "nome": "AD02_ING_VD_ST_LXPAGO.SET26.mov",
-          "gasto": 77.83,
+          "gasto": 96.67,
           "vendas": 0,
           "cac": null,
           "roas": 0.0
         },
         {
           "nome": "AD03_ING_VD_ST_LXPAGO.SET26.mov",
-          "gasto": 76.22,
+          "gasto": 96.64,
           "vendas": 0,
           "cac": null,
           "roas": 0.0
         },
         {
           "nome": "AD04_ING_VD_ST_LXPAGO.SET26.mov",
-          "gasto": 66.1,
+          "gasto": 84.56,
           "vendas": 0,
           "cac": null,
           "roas": 0.0
         },
         {
           "nome": "AD07_ING_VD_ST_LXPAGO.SET26.mov",
-          "gasto": 73.6,
+          "gasto": 92.43,
           "vendas": 0,
           "cac": null,
           "roas": 0.0
         },
         {
           "nome": "AD09_ING_VD_ST_LXPAGO.SET26.mov",
-          "gasto": 64.95,
+          "gasto": 86.78,
           "vendas": 0,
           "cac": null,
           "roas": 0.0
         }
       ],
-      "piores_anuncios": []
+      "piores_anuncios": [
+        {
+          "nome": "AD10_ING_VD_ST_LXPAGO.SET26.mov",
+          "gasto": 27.5,
+          "vendas": 0,
+          "cac": null,
+          "roas": 0.0
+        },
+        {
+          "nome": "AD05_ING_VD_ST_LXPAGO.SET26.mov",
+          "gasto": 27.97,
+          "vendas": 0,
+          "cac": null,
+          "roas": 0.0
+        },
+        {
+          "nome": "EST05",
+          "gasto": 7.94,
+          "vendas": 0,
+          "cac": null,
+          "roas": 0.0
+        },
+        {
+          "nome": "EST06",
+          "gasto": 18.95,
+          "vendas": 0,
+          "cac": null,
+          "roas": 0.0
+        },
+        {
+          "nome": "EST03",
+          "gasto": 8.38,
+          "vendas": 0,
+          "cac": null,
+          "roas": 0.0
+        }
+      ]
     },
     "30d": {
-      "de": "2026-08-07",
-      "ate": "2026-09-05",
+      "de": "2026-08-08",
+      "ate": "2026-09-06",
       "total": {
-        "gasto": 358.69,
-        "impr": 14425.0,
-        "cliques": 126.0,
-        "pv": 86.0,
-        "ck": 8.0,
-        "vendas": 119,
-        "fat": 1359.73,
-        "cpm": 24.87,
-        "ctr": 0.0087,
-        "cpc": 2.85,
-        "cpv": 4.17,
-        "cr": 0.6825,
-        "cpic": 44.84,
-        "vischk": 0.093,
+        "gasto": 592.87,
+        "impr": 24215.0,
+        "cliques": 197.0,
+        "pv": 147.0,
+        "ck": 18.0,
+        "vendas": 123,
+        "fat": 1438.37,
+        "cpm": 24.48,
+        "ctr": 0.0081,
+        "cpc": 3.01,
+        "cpv": 4.03,
+        "cr": 0.7462,
+        "cpic": 32.94,
+        "vischk": 0.1224,
         "convchk": 0.0,
         "convlp": 0.0,
-        "cac": 3.01,
-        "roas": 3.79,
-        "ticket": 11.43
+        "cac": 4.82,
+        "roas": 2.43,
+        "ticket": 11.69
       },
       "ads": {
-        "gasto": 358.69,
-        "impr": 14425.0,
-        "cliques": 126.0,
-        "pv": 86.0,
-        "ck": 8.0,
+        "gasto": 592.87,
+        "impr": 24215.0,
+        "cliques": 197.0,
+        "pv": 147.0,
+        "ck": 18.0,
         "vendas": 0,
         "fat": 0.0,
-        "cpm": 24.87,
-        "ctr": 0.0087,
-        "cpc": 2.85,
-        "cpv": 4.17,
-        "cr": 0.6825,
-        "cpic": 44.84,
-        "vischk": 0.093,
+        "cpm": 24.48,
+        "ctr": 0.0081,
+        "cpc": 3.01,
+        "cpv": 4.03,
+        "cr": 0.7462,
+        "cpic": 32.94,
+        "vischk": 0.1224,
         "convchk": 0.0,
         "convlp": 0.0,
         "cac": null,
@@ -599,20 +765,20 @@
       "campanhas": [
         {
           "nome": "OPF-SET26 | E4-VEN | P1-QUENTE | VND | ABO | 2026-09-03 | Teste de criativos",
-          "gasto": 358.69,
-          "impr": 14425.0,
-          "cliques": 126.0,
-          "pv": 86.0,
-          "ck": 8.0,
+          "gasto": 592.87,
+          "impr": 24215.0,
+          "cliques": 197.0,
+          "pv": 147.0,
+          "ck": 18.0,
           "vendas": 0,
           "fat": 0.0,
-          "cpm": 24.87,
-          "ctr": 0.0087,
-          "cpc": 2.85,
-          "cpv": 4.17,
-          "cr": 0.6825,
-          "cpic": 44.84,
-          "vischk": 0.093,
+          "cpm": 24.48,
+          "ctr": 0.0081,
+          "cpc": 3.01,
+          "cpv": 4.03,
+          "cr": 0.7462,
+          "cpic": 32.94,
+          "vischk": 0.1224,
           "convchk": 0.0,
           "convlp": 0.0,
           "cac": null,
@@ -623,81 +789,117 @@
       "top_anuncios": [
         {
           "nome": "AD02_ING_VD_ST_LXPAGO.SET26.mov",
-          "gasto": 77.83,
+          "gasto": 96.67,
           "vendas": 0,
           "cac": null,
           "roas": 0.0
         },
         {
           "nome": "AD03_ING_VD_ST_LXPAGO.SET26.mov",
-          "gasto": 76.22,
+          "gasto": 96.64,
           "vendas": 0,
           "cac": null,
           "roas": 0.0
         },
         {
           "nome": "AD04_ING_VD_ST_LXPAGO.SET26.mov",
-          "gasto": 66.1,
+          "gasto": 84.56,
           "vendas": 0,
           "cac": null,
           "roas": 0.0
         },
         {
           "nome": "AD07_ING_VD_ST_LXPAGO.SET26.mov",
-          "gasto": 73.6,
+          "gasto": 92.43,
           "vendas": 0,
           "cac": null,
           "roas": 0.0
         },
         {
           "nome": "AD09_ING_VD_ST_LXPAGO.SET26.mov",
-          "gasto": 64.95,
+          "gasto": 86.78,
           "vendas": 0,
           "cac": null,
           "roas": 0.0
         }
       ],
-      "piores_anuncios": []
+      "piores_anuncios": [
+        {
+          "nome": "AD10_ING_VD_ST_LXPAGO.SET26.mov",
+          "gasto": 27.5,
+          "vendas": 0,
+          "cac": null,
+          "roas": 0.0
+        },
+        {
+          "nome": "AD05_ING_VD_ST_LXPAGO.SET26.mov",
+          "gasto": 27.97,
+          "vendas": 0,
+          "cac": null,
+          "roas": 0.0
+        },
+        {
+          "nome": "EST05",
+          "gasto": 7.94,
+          "vendas": 0,
+          "cac": null,
+          "roas": 0.0
+        },
+        {
+          "nome": "EST06",
+          "gasto": 18.95,
+          "vendas": 0,
+          "cac": null,
+          "roas": 0.0
+        },
+        {
+          "nome": "EST03",
+          "gasto": 8.38,
+          "vendas": 0,
+          "cac": null,
+          "roas": 0.0
+        }
+      ]
     },
     "mes": {
       "de": "2026-09-01",
-      "ate": "2026-09-05",
+      "ate": "2026-09-06",
       "total": {
-        "gasto": 358.69,
-        "impr": 14425.0,
-        "cliques": 126.0,
-        "pv": 86.0,
-        "ck": 8.0,
-        "vendas": 2,
-        "fat": 58.99,
-        "cpm": 24.87,
-        "ctr": 0.0087,
-        "cpc": 2.85,
-        "cpv": 4.17,
-        "cr": 0.6825,
-        "cpic": 44.84,
-        "vischk": 0.093,
+        "gasto": 592.87,
+        "impr": 24215.0,
+        "cliques": 197.0,
+        "pv": 147.0,
+        "ck": 18.0,
+        "vendas": 6,
+        "fat": 137.63,
+        "cpm": 24.48,
+        "ctr": 0.0081,
+        "cpc": 3.01,
+        "cpv": 4.03,
+        "cr": 0.7462,
+        "cpic": 32.94,
+        "vischk": 0.1224,
         "convchk": 0.0,
         "convlp": 0.0,
-        "cac": 179.35,
-        "roas": 0.16,
-        "ticket": 29.49
+        "cac": 98.81,
+        "roas": 0.23,
+        "ticket": 22.94
       },
       "ads": {
-        "gasto": 358.69,
-        "impr": 14425.0,
-        "cliques": 126.0,
-        "pv": 86.0,
-        "ck": 8.0,
+        "gasto": 592.87,
+        "impr": 24215.0,
+        "cliques": 197.0,
+        "pv": 147.0,
+        "ck": 18.0,
         "vendas": 0,
         "fat": 0.0,
-        "cpm": 24.87,
-        "ctr": 0.0087,
-        "cpc": 2.85,
-        "cpv": 4.17,
-        "cr": 0.6825,
-        "cpic": 44.84,
-        "vischk": 0.093,
+        "cpm": 24.48,
+        "ctr": 0.0081,
+        "cpc": 3.01,
+        "cpv": 4.03,
+        "cr": 0.7462,
+        "cpic": 32.94,
+        "vischk": 0.1224,
         "convchk": 0.0,
         "convlp": 0.0,
         "cac": null,
@@ -707,20 +909,20 @@
       "campanhas": [
         {
           "nome": "OPF-SET26 | E4-VEN | P1-QUENTE | VND | ABO | 2026-09-03 | Teste de criativos",
-          "gasto": 358.69,
-          "impr": 14425.0,
-          "cliques": 126.0,
-          "pv": 86.0,
-          "ck": 8.0,
+          "gasto": 592.87,
+          "impr": 24215.0,
+          "cliques": 197.0,
+          "pv": 147.0,
+          "ck": 18.0,
           "vendas": 0,
           "fat": 0.0,
-          "cpm": 24.87,
-          "ctr": 0.0087,
-          "cpc": 2.85,
-          "cpv": 4.17,
-          "cr": 0.6825,
-          "cpic": 44.84,
-          "vischk": 0.093,
+          "cpm": 24.48,
+          "ctr": 0.0081,
+          "cpc": 3.01,
+          "cpv": 4.03,
+          "cr": 0.7462,
+          "cpic": 32.94,
+          "vischk": 0.1224,
           "convchk": 0.0,
           "convlp": 0.0,
           "cac": null,
@@ -731,41 +933,77 @@
       "top_anuncios": [
         {
           "nome": "AD02_ING_VD_ST_LXPAGO.SET26.mov",
-          "gasto": 77.83,
+          "gasto": 96.67,
           "vendas": 0,
           "cac": null,
           "roas": 0.0
         },
         {
           "nome": "AD03_ING_VD_ST_LXPAGO.SET26.mov",
-          "gasto": 76.22,
+          "gasto": 96.64,
           "vendas": 0,
           "cac": null,
           "roas": 0.0
         },
         {
           "nome": "AD04_ING_VD_ST_LXPAGO.SET26.mov",
-          "gasto": 66.1,
+          "gasto": 84.56,
           "vendas": 0,
           "cac": null,
           "roas": 0.0
         },
         {
           "nome": "AD07_ING_VD_ST_LXPAGO.SET26.mov",
-          "gasto": 73.6,
+          "gasto": 92.43,
           "vendas": 0,
           "cac": null,
           "roas": 0.0
         },
         {
           "nome": "AD09_ING_VD_ST_LXPAGO.SET26.mov",
-          "gasto": 64.95,
+          "gasto": 86.78,
           "vendas": 0,
           "cac": null,
           "roas": 0.0
         }
       ],
-      "piores_anuncios": []
+      "piores_anuncios": [
+        {
+          "nome": "AD10_ING_VD_ST_LXPAGO.SET26.mov",
+          "gasto": 27.5,
+          "vendas": 0,
+          "cac": null,
+          "roas": 0.0
+        },
+        {
+          "nome": "AD05_ING_VD_ST_LXPAGO.SET26.mov",
+          "gasto": 27.97,
+          "vendas": 0,
+          "cac": null,
+          "roas": 0.0
+        },
+        {
+          "nome": "EST05",
+          "gasto": 7.94,
+          "vendas": 0,
+          "cac": null,
+          "roas": 0.0
+        },
+        {
+          "nome": "EST06",
+          "gasto": 18.95,
+          "vendas": 0,
+          "cac": null,
+          "roas": 0.0
+        },
+        {
+          "nome": "EST03",
+          "gasto": 8.38,
+          "vendas": 0,
+          "cac": null,
+          "roas": 0.0
+        }
+      ]
     },
     "mespass": {
       "de": "2026-08-01",
@@ -818,43 +1056,43 @@
     },
     "todo": {
       "de": "2026-08-13",
-      "ate": "2026-09-05",
+      "ate": "2026-09-06",
       "total": {
-        "gasto": 358.69,
-        "impr": 14425.0,
-        "cliques": 126.0,
-        "pv": 86.0,
-        "ck": 8.0,
-        "vendas": 119,
-        "fat": 1359.73,
-        "cpm": 24.87,
-        "ctr": 0.0087,
-        "cpc": 2.85,
-        "cpv": 4.17,
-        "cr": 0.6825,
-        "cpic": 44.84,
-        "vischk": 0.093,
+        "gasto": 592.87,
+        "impr": 24215.0,
+        "cliques": 197.0,
+        "pv": 147.0,
+        "ck": 18.0,
+        "vendas": 123,
+        "fat": 1438.37,
+        "cpm": 24.48,
+        "ctr": 0.0081,
+        "cpc": 3.01,
+        "cpv": 4.03,
+        "cr": 0.7462,
+        "cpic": 32.94,
+        "vischk": 0.1224,
         "convchk": 0.0,
         "convlp": 0.0,
-        "cac": 3.01,
-        "roas": 3.79,
-        "ticket": 11.43
+        "cac": 4.82,
+        "roas": 2.43,
+        "ticket": 11.69
       },
       "ads": {
-        "gasto": 358.69,
-        "impr": 14425.0,
-        "cliques": 126.0,
-        "pv": 86.0,
-        "ck": 8.0,
+        "gasto": 592.87,
+        "impr": 24215.0,
+        "cliques": 197.0,
+        "pv": 147.0,
+        "ck": 18.0,
         "vendas": 0,
         "fat": 0.0,
-        "cpm": 24.87,
-        "ctr": 0.0087,
-        "cpc": 2.85,
-        "cpv": 4.17,
-        "cr": 0.6825,
-        "cpic": 44.84,
-        "vischk": 0.093,
+        "cpm": 24.48,
+        "ctr": 0.0081,
+        "cpc": 3.01,
+        "cpv": 4.03,
+        "cr": 0.7462,
+        "cpic": 32.94,
+        "vischk": 0.1224,
         "convchk": 0.0,
         "convlp": 0.0,
         "cac": null,
@@ -864,20 +1102,20 @@
       "campanhas": [
         {
           "nome": "OPF-SET26 | E4-VEN | P1-QUENTE | VND | ABO | 2026-09-03 | Teste de criativos",
-          "gasto": 358.69,
-          "impr": 14425.0,
-          "cliques": 126.0,
-          "pv": 86.0,
-          "ck": 8.0,
+          "gasto": 592.87,
+          "impr": 24215.0,
+          "cliques": 197.0,
+          "pv": 147.0,
+          "ck": 18.0,
           "vendas": 0,
           "fat": 0.0,
-          "cpm": 24.87,
-          "ctr": 0.0087,
-          "cpc": 2.85,
-          "cpv": 4.17,
-          "cr": 0.6825,
-          "cpic": 44.84,
-          "vischk": 0.093,
+          "cpm": 24.48,
+          "ctr": 0.0081,
+          "cpc": 3.01,
+          "cpv": 4.03,
+          "cr": 0.7462,
+          "cpic": 32.94,
+          "vischk": 0.1224,
           "convchk": 0.0,
           "convlp": 0.0,
           "cac": null,
@@ -888,41 +1126,77 @@
       "top_anuncios": [
         {
           "nome": "AD02_ING_VD_ST_LXPAGO.SET26.mov",
-          "gasto": 77.83,
+          "gasto": 96.67,
           "vendas": 0,
           "cac": null,
           "roas": 0.0
         },
         {
           "nome": "AD03_ING_VD_ST_LXPAGO.SET26.mov",
-          "gasto": 76.22,
+          "gasto": 96.64,
           "vendas": 0,
           "cac": null,
           "roas": 0.0
         },
         {
           "nome": "AD04_ING_VD_ST_LXPAGO.SET26.mov",
-          "gasto": 66.1,
+          "gasto": 84.56,
           "vendas": 0,
           "cac": null,
           "roas": 0.0
         },
         {
           "nome": "AD07_ING_VD_ST_LXPAGO.SET26.mov",
-          "gasto": 73.6,
+          "gasto": 92.43,
           "vendas": 0,
           "cac": null,
           "roas": 0.0
         },
         {
           "nome": "AD09_ING_VD_ST_LXPAGO.SET26.mov",
-          "gasto": 64.95,
+          "gasto": 86.78,
           "vendas": 0,
           "cac": null,
           "roas": 0.0
         }
       ],
-      "piores_anuncios": []
+      "piores_anuncios": [
+        {
+          "nome": "AD10_ING_VD_ST_LXPAGO.SET26.mov",
+          "gasto": 27.5,
+          "vendas": 0,
+          "cac": null,
+          "roas": 0.0
+        },
+        {
+          "nome": "AD05_ING_VD_ST_LXPAGO.SET26.mov",
+          "gasto": 27.97,
+          "vendas": 0,
+          "cac": null,
+          "roas": 0.0
+        },
+        {
+          "nome": "EST05",
+          "gasto": 7.94,
+          "vendas": 0,
+          "cac": null,
+          "roas": 0.0
+        },
+        {
+          "nome": "EST06",
+          "gasto": 18.95,
+          "vendas": 0,
+          "cac": null,
+          "roas": 0.0
+        },
+        {
+          "nome": "EST03",
+          "gasto": 8.38,
+          "vendas": 0,
+          "cac": null,
+          "roas": 0.0
+        }
+      ]
     }
   }
 }
