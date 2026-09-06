@@ -50,6 +50,13 @@ MAIN_PRODUCT_PREFIX = ""   # ex.: "nome do produto" (produto "Nome do Produto")
 # build filtra por is_paid(). Se a planilha é uma lista de COMPRADORES onde
 # toda linha já é uma compra concretizada (sem coluna de status utilizável),
 # deixe True para contar todas as linhas como venda paga.
+# Qual coluna UTM da planilha de Compradores carrega o Ad Name do Meta:
+# "utm_content" (padrão), "utm_term" ou "utm_medium". Depende do parametrizador
+# de URL usado nos anúncios do cliente — CONFIRA nos dados antes de assumir: a
+# coluna que não carrega o anúncio costuma trazer o posicionamento
+# (Instagram_Feed/Stories), e casar pela coluna errada zera as atribuições.
+AD_UTM_COLUMN = "utm_content"
+
 COUNT_ALL_AS_PAID = True
 
 # ==========================================================================

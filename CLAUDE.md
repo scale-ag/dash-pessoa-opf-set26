@@ -18,6 +18,9 @@ Ordem para colocar um cliente novo no ar. Cada item aponta o arquivo e o marcado
    `build/config.py` e preencha (comentado campo a campo no próprio arquivo):
    - `SPREADSHEET_ID`, `GID_META`, `GID_SALES` (planilha do cliente)
    - `TAX_FACTOR`, `MAIN_PRODUCT_PREFIX`, `COUNT_ALL_AS_PAID` (regras de negócio)
+   - `AD_UTM_COLUMN` — qual coluna UTM carrega o `Ad Name` do Meta (`utm_content`
+     por padrão, mas **confira nos dados**: casar pela coluna errada zera as
+     atribuições e a aba Meta Ads fica com gasto e zero venda)
    - `CLIENT_NAME`, `CLIENT_SUB`, `TAX_LABEL`, `MAIN_PRODUCT` (rótulos exibidos)
    - `CAC_TARGET`, `ROAS_TARGET`, `REPORT_BAND_LOW`, `REPORT_BAND_HIGH` (metas da aba Relatórios)
 2. [ ] **Este arquivo (`CLAUDE.md`)** — preencher a seção "Fontes de dados" abaixo
@@ -109,15 +112,32 @@ perguntas do formulário de captação.
 
 ### Pontos de atenção deste cliente (verificados na planilha em 04/09/2026)
 
-1. **UTMs praticamente vazias**: apenas **1 de 119** linhas tem UTM preenchida, e
-   nela o `utm_content` é a macro não substituída `{{adset.name}}`
-   (`utm_campaign=bio`, `utm_medium=organic`). Como o match Meta↔venda exige
-   `utm_campaign`+`utm_content` batendo com uma linha real do Meta, **nenhuma
-   venda é atribuída ao tráfego pago**: a aba Meta Ads mostra gasto sem vendas, e
-   as vendas caem em `(sem campanha)`. Não é bug do build — é rastreamento
-   faltando no checkout. **Corrigir na origem**: passar as UTMs do Meta para o
-   checkout (`utm_campaign={{campaign.name}}`, `utm_content={{ad.name}}`; note
-   que a macro correta para o anúncio é `ad.name`, não `adset.name`).
+1. **O Ad Name vem de `utm_term`, não de `utm_content`** (medido em 06/09/2026,
+   com 123 vendas e 31 linhas de Meta). Cada coluna UTM contra cada campo do Meta,
+   contando quantos valores batem exatamente:
+
+   | coluna UTM | preenchidas | Campaign Name | Ad Set Name | Ad Name |
+   |---|---|---|---|---|
+   | `utm_campaign` | 5 | **4** | 0 | 0 |
+   | `utm_medium` | 5 | 0 | **4** | 0 |
+   | `utm_term` | 4 | 0 | 0 | **4** |
+   | `utm_content` | 5 | 0 | 0 | **0** |
+
+   O `utm_content` deste cliente carrega o **posicionamento** (`Instagram_Feed`,
+   `Instagram_Stories`, `Facebook_Mobile_Feed`) — casar por ele zerava a
+   atribuição. Corrigido via `AD_UTM_COLUMN = "utm_term"` em `build/config.py`
+   (a engine continua genérica; o padrão do template segue `utm_content`).
+   Mapeamento deste cliente:
+   `utm_campaign → Campaign Name` · `utm_medium → Ad Set Name` · `utm_term → Ad Name`.
+
+   ⚠️ **Limite que permanece:** só **5 das 123** linhas da BASE COMPLETA têm
+   qualquer UTM preenchida — as outras 118 chegam sem rastreamento nenhum. Com o
+   match corrigido, 4 dessas 5 casam com o Meta (a 5ª é orgânica: `utm_campaign=bio`,
+   `utm_medium=organic`, com a macro não substituída `{{adset.name}}` em
+   `utm_content`). Ou seja: a aba Meta Ads passa a mostrar vendas, mas ainda é uma
+   fração do total. Isso é rastreamento faltando no checkout, não bug do build —
+   garantir que o link do anúncio leve as UTMs para o checkout em **todas** as
+   compras.
 2. **Janelas de data quase sem sobreposição**: o Meta Ads começa em 03/09/2026 e
    a BASE COMPLETA vai de 13/08 a 03/09/2026 — a maior parte das inscrições é
    anterior ao início do tráfego exportado. Enquanto isso durar, CAC/ROAS por
@@ -182,11 +202,13 @@ ConvCHK (Vendas/Checkouts) · Faturamento · ROAS (Faturamento/Gasto) · Ticket 
 Toggle ON aplica o `TAX_FACTOR` (definido em `build/config.py`) sobre os custos do Meta.
 
 ### Convenções de campanha
-`Campaign Name = utm_campaign`, `Ad Set Name = utm_medium`, `Ad Name = utm_content`
-(⚠️ **confira se não é** `utm_term` no caso deste cliente — essa coluna costuma
-carregar o **posicionamento** do anúncio, não o nome dele — ver "Pontos de atenção"
-acima). O match com o Meta (campo `meta`, usado pela aba Meta Ads) exige
-`utm_campaign`+`utm_content` batendo com uma linha real do Meta; quando casa, a venda
+Neste cliente (verificado nos dados, ver "Pontos de atenção" #1):
+`Campaign Name = utm_campaign` · `Ad Set Name = utm_medium` · **`Ad Name = utm_term`**
+(o `utm_content` carrega o posicionamento). Qual coluna o build usa para o anúncio
+é definido por `AD_UTM_COLUMN` em `build/config.py` — aqui, `"utm_term"`.
+
+O match com o Meta (campo `meta`, usado pela aba Meta Ads) exige `utm_campaign` +
+a coluna de `AD_UTM_COLUMN` batendo com uma linha real do Meta; quando casa, a venda
 herda a campanha/conjunto reais do Meta (para o gasto e a venda caírem na mesma linha
 das tabelas).
 
@@ -289,8 +311,11 @@ Teste local:
    não mostrou o aviso de KV sem permissão.
 8. **Venda não aparece na aba Meta Ads (ou aparece na campanha errada):** confirme
    qual coluna UTM da planilha do cliente carrega o identificador real do anúncio do
-   Meta (`Ad Name`) — nem sempre é `UTM Content`; `UTM Term` costuma carregar o
-   **posicionamento** (`Instagram_Reels`/`Feed`/`Stories`), não o nome do anúncio.
+   Meta (`Ad Name`) e ajuste `AD_UTM_COLUMN` em `build/config.py`. **Não assuma pela
+   convenção** — nos dados deste cliente é `utm_term`, e o `utm_content` traz o
+   posicionamento (`Instagram_Feed`/`Stories`); em outros é o contrário. Jeito rápido
+   de decidir: contar, para cada coluna UTM, quantos valores batem exatamente com o
+   conjunto de `Ad Name` do Meta — a coluna certa bate quase 100%, as outras batem 0.
    Casar pela coluna errada zera as atribuições. Além disso, nomes de anúncio podem se
    repetir entre campanhas diferentes — o match precisa ser **campanha+anúncio juntos**
    (`UTM Campaign`+`UTM Content`), senão a venda pode ser atribuída à campanha errada.

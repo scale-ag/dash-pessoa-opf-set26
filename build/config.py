@@ -38,6 +38,14 @@ TAX_FACTOR = 1.13806   # +13,806%
 # Na planilha, PRODUTO = "OPERAÇÃO DA PROVA À FARDA" em 100% das linhas.
 MAIN_PRODUCT_PREFIX = "operacao da prova a farda"
 
+# Coluna UTM que carrega o Ad Name do Meta. Verificado nos dados em 06/09/2026:
+# utm_term casa com Ad Name (4 de 4 valores preenchidos), enquanto utm_content
+# carrega o POSICIONAMENTO (Instagram_Feed, Instagram_Stories,
+# Facebook_Mobile_Feed) e casa com nada — era por isso que a dashboard mostrava
+# zero venda atribuída ao tráfego pago.
+#   utm_campaign -> Campaign Name  ·  utm_medium -> Ad Set Name  ·  utm_term -> Ad Name
+AD_UTM_COLUMN = "utm_term"
+
 # A aba BASE COMPLETA não tem coluna de status de pagamento — toda linha já é
 # uma inscrição paga (ingresso do evento). Por isso True.
 COUNT_ALL_AS_PAID = True

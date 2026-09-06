@@ -67,6 +67,18 @@ ROAS_TARGET = cfg.ROAS_TARGET
 REPORT_BAND_LOW = cfg.REPORT_BAND_LOW
 REPORT_BAND_HIGH = cfg.REPORT_BAND_HIGH
 IA_WORKER_URL = cfg.IA_WORKER_URL
+# Qual coluna UTM da planilha de Compradores carrega o Ad Name do Meta.
+# Varia por cliente conforme o parametrizador de URL usado no anuncio:
+# uns mandam o nome do anuncio em utm_content, outros em utm_term (e ai o
+# utm_content costuma trazer o POSICIONAMENTO). Ausente/vazio -> utm_content
+# (padrao do template). Casar pela coluna errada zera as atribuicoes.
+_AD_UTM_VALIDAS = ("utm_content", "utm_term", "utm_medium")
+AD_UTM_COLUMN = getattr(cfg, "AD_UTM_COLUMN", "") or "utm_content"
+if AD_UTM_COLUMN not in _AD_UTM_VALIDAS:
+    sys.exit(
+        f"ERRO: AD_UTM_COLUMN={AD_UTM_COLUMN!r} em build/config.py nao e valido.\n"
+        "Use um de: " + ", ".join(_AD_UTM_VALIDAS) + "."
+    )
 
 EXPORT_URL = "https://docs.google.com/spreadsheets/d/{sid}/export?format=csv&gid={gid}"
 META_CSV_URL = EXPORT_URL.format(sid=SPREADSHEET_ID, gid=GID_META)
@@ -272,6 +284,7 @@ def process(meta_rows, sales_rows):
          # por isso "faturamento" vem ANTES de "valor" nos aliases.
          "val": ["faturamento", "valor da venda", "valor", "value", "amount"],
          "utm_content": ["utm content", "utm_content"],
+         "utm_term": ["utm term", "utm_term"],
          "utm_campaign": ["utm campaign", "utm_campaign"],
          "utm_medium": ["utm medium", "utm_medium"],
          "status": ["status"]},
@@ -292,10 +305,12 @@ def process(meta_rows, sales_rows):
         if not COUNT_ALL_AS_PAID and not is_paid(cell(row, sidx["status"])):
             continue
         prod = cell(row, sidx["prod"])
-        # O identificador do anúncio no Meta (Ad Name = "AD01", "AD02"...) vem do
-        # UTM Content. O UTM Term carrega o POSICIONAMENTO (Instagram_Reels/Feed/
-        # Stories), não o anúncio — por isso o match é pelo UTM Content.
-        ad = cell(row, sidx["utm_content"]) or "(sem anúncio)"
+        # O identificador do anúncio no Meta (Ad Name) vem da coluna UTM apontada
+        # por AD_UTM_COLUMN em build/config.py — que coluna é depende do
+        # parametrizador de URL do cliente. A outra normalmente carrega o
+        # POSICIONAMENTO (Instagram_Feed/Stories, Facebook_Mobile_Feed), que não
+        # casa com nada do Meta; conferir antes de mudar.
+        ad = cell(row, sidx[AD_UTM_COLUMN]) or "(sem anúncio)"
         sale_camp = cell(row, sidx["utm_campaign"]) or "(sem campanha)"
         main = is_main_product(prod)
         # Match com o Meta = campanha + anúncio juntos (o mesmo Ad Name se repete
