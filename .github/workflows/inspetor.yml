@@ -1,0 +1,26 @@
+# WORKFLOW TEMPORARIO — sera removido depois de mapear as planilhas do cliente
+# novo. Roda no runner (que alcanca docs.google.com) e imprime no log as abas,
+# gids, colunas e o cruzamento UTM x Meta. Somente leitura das planilhas.
+name: Inspetor de Planilhas (temporario)
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ claude/dash-marlon-mattedi-setup-k6dral ]
+    paths:
+      - "tools/inspetor.py"
+      - ".github/workflows/inspetor.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  inspecionar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Mapear planilhas do cliente
+        run: python tools/inspetor.py
