@@ -38,24 +38,24 @@ jobs:
           python - <<'PY'
           import json, re, pathlib
           html = pathlib.Path("dist/index.html").read_text(encoding="utf-8")
-          m = re.search(r'id="__DATA__"[^>]*>(.*?)</script>', html, re.S)
-          if not m:
-              m = re.search(r'const\s+DATA\s*=\s*(\{.*?\});', html, re.S)
+          m = re.search(r'<script id="payload" type="application/json">(.*?)</script>',
+                        html, re.S)
+          assert m, "ERRO: bloco <script id=payload> nao encontrado no HTML"
           data = json.loads(m.group(1))
-          meta, sales = data.get("meta", []), data.get("sales", [])
-          print(f"registros meta  : {len(meta)}")
-          print(f"registros sales : {len(sales)}")
-          print(f"cliente         : {data.get('client_name')} / {data.get('client_sub')}")
-          print(f"produto         : {data.get('main_product')}")
-          gasto = sum(r.get("sp", 0) for r in meta)
-          print(f"gasto total     : R$ {gasto:,.2f}")
-          fat = sum(r.get("v", 0) for r in sales)
-          print(f"faturamento     : R$ {fat:,.2f}")
-          atrib = sum(1 for r in sales if r.get("meta"))
-          print(f"vendas casadas com o Meta : {atrib}")
+          b, meta, sales = data["build"], data["meta"], data["sales"]
+          print(f"cliente          : {b['client_name']} / {b['client_sub']}")
+          print(f"produto principal: {b['main_product']}  (prefixo {b['main_product_prefix']!r})")
+          print(f"periodo          : {b['date_min']} .. {b['date_max']}")
+          print(f"metas            : CAC {b['cac_target']} | ROAS {b['roas_target']} | imposto x{b['tax_factor']}")
+          print(f"registros meta   : {len(meta)}")
+          print(f"vendas           : {len(sales)}  (produto principal: {sum(s['main'] for s in sales)})")
+          print(f"gasto total      : R$ {sum(r['sp'] for r in meta):,.2f}")
+          print(f"faturamento      : R$ {sum(s['val'] for s in sales):,.2f}")
+          atrib = sum(s["meta"] for s in sales)
+          print(f"vendas casadas com o Meta (trafego pago): {atrib}")
           assert meta,  "ERRO: nenhum registro do Meta Ads"
-          assert sales, "ERRO: nenhuma venda (is_paid pode ter descartado tudo)"
-          assert atrib, "ERRO: nenhuma venda atribuida ao Meta (AD_UTM_COLUMN errado?)"
+          assert sales, "ERRO: nenhuma venda — is_paid() pode ter descartado tudo"
+          assert atrib, "ERRO: zero vendas atribuidas ao Meta — AD_UTM_COLUMN errado?"
           print("\nOK: build valido.")
           PY
 
