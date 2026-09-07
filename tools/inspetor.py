@@ -1,239 +1,135 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""
-FERRAMENTA TEMPORARIA (nao faz parte da engine).
-
-Roda no runner do GitHub Actions - que alcanca docs.google.com, o que o sandbox
-do agente nao alcanca (ver CLAUDE.md, problema conhecido #4).
-
-Objetivo: descobrir, para as planilhas de um cliente novo:
-  - nome de cada aba + gid correspondente
-  - cabecalho completo (todas as colunas, com indice) de cada aba usada
-  - Campaign Names distintos  -> sigla do funil
-  - Produtos distintos        -> MAIN_PRODUCT_PREFIX
-  - cruzamento UTM x Meta     -> AD_UTM_COLUMN (o erro que zera atribuicao)
-
-SOMENTE LEITURA. Nunca escreve nas planilhas.
-"""
+"""FERRAMENTA TEMPORARIA — passo 2: analisa a aba 'Novas Vendas' (gid 659512725)
+especificamente, compara com a aba 'Vendas' (gid 0) e quebra o Meta por sigla
+de funil. SOMENTE LEITURA."""
 from __future__ import annotations
 
-import csv
-import io
-import re
-import sys
-import unicodedata
-import urllib.request
-import zipfile
-from collections import Counter
+import csv, io, re, sys, unicodedata, urllib.request
+from collections import Counter, defaultdict
 
 META_ID = "1oXEzPBmdYVGD-2gplchyHK0t6nz4JdtlDTnB5skqZPY"
 SALES_ID = "18OmJKQHTcjyz3z2i1cisQL9WJGRt27lxU97LRA4Znak"
-ABA_VENDAS = "novas vendas"          # aba pedida pelo cliente (normalizada)
-
+GID_VENDAS, GID_NOVAS = "0", "659512725"
 UA = {"User-Agent": "Mozilla/5.0 (compatible; dash-inspetor/1.0)"}
 
 
-def get(url: str, timeout: int = 90) -> bytes:
+def rows(sid: str, gid: str) -> list[list[str]]:
+    url = f"https://docs.google.com/spreadsheets/d/{sid}/export?format=csv&gid={gid}"
     req = urllib.request.Request(url, headers=UA)
-    with urllib.request.urlopen(req, timeout=timeout) as r:
-        return r.read()
+    with urllib.request.urlopen(req, timeout=90) as r:
+        return list(csv.reader(io.StringIO(r.read().decode("utf-8", "replace"))))
 
 
 def norm(s) -> str:
-    s = "".join(c for c in unicodedata.normalize("NFKD", str(s or ""))
-                if not unicodedata.combining(c))
+    s = "".join(c for c in unicodedata.normalize("NFKD", str(s or "")) if not unicodedata.combining(c))
     return s.strip().lower()
 
 
-def head(txt: str, n: int = 200) -> str:
-    return txt[:n].replace("\n", " ")
-
-
-def sheet_names_via_xlsx(sid: str) -> list[str]:
-    """Nomes das abas, na ordem, lidos do proprio .xlsx (sem dependencia externa)."""
-    raw = get(f"https://docs.google.com/spreadsheets/d/{sid}/export?format=xlsx")
-    if raw[:2] != b"PK":
-        raise RuntimeError("resposta nao e um xlsx (planilha pode nao estar publica): "
-                           + head(raw[:300].decode("utf-8", "replace")))
-    with zipfile.ZipFile(io.BytesIO(raw)) as z:
-        wb = z.read("xl/workbook.xml").decode("utf-8", "replace")
-    return re.findall(r'<sheet[^>]*name="([^"]*)"', wb)
-
-
-def gids_via_html(sid: str) -> list[str]:
-    """Todos os gids que aparecem na pagina da planilha, na ordem de 1a aparicao."""
-    found: list[str] = []
-    for path in ("edit", "htmlview"):
-        try:
-            html = get(f"https://docs.google.com/spreadsheets/d/{sid}/{path}").decode("utf-8", "replace")
-        except Exception as e:                     # noqa: BLE001
-            print(f"    (aviso: /{path} falhou: {e})")
-            continue
-        for pat in (r'"gid":"?(\d+)"?', r'gid=(\d+)', r'#rangeid=(\d+)'):
-            for g in re.findall(pat, html):
-                if g not in found:
-                    found.append(g)
-    return found
-
-
-def csv_rows(sid: str, gid: str) -> list[list[str]] | None:
-    url = f"https://docs.google.com/spreadsheets/d/{sid}/export?format=csv&gid={gid}"
+def num(v: str) -> float:
+    v = (v or "").strip().replace("R$", "").replace(" ", "")
+    if not v:
+        return 0.0
+    if "," in v and "." in v:
+        v = v.replace(".", "").replace(",", ".")
+    elif "," in v:
+        v = v.replace(",", ".")
     try:
-        raw = get(url).decode("utf-8", "replace")
-    except Exception as e:                          # noqa: BLE001
-        print(f"    gid={gid}: ERRO {e}")
-        return None
-    if raw.lstrip()[:1] == "<":
-        print(f"    gid={gid}: veio HTML (sem permissao/gid inexistente)")
-        return None
-    return list(csv.reader(io.StringIO(raw)))
+        return float(v)
+    except ValueError:
+        return 0.0
 
 
-def mapear_planilha(rotulo: str, sid: str) -> dict[str, list[list[str]]]:
-    """Imprime abas/gids e devolve {gid: rows} para cada gid legivel."""
-    print(f"\n{'='*78}\n{rotulo}  —  https://docs.google.com/spreadsheets/d/{sid}\n{'='*78}")
-    try:
-        nomes = sheet_names_via_xlsx(sid)
-        print(f"  Abas (ordem real, via xlsx): {nomes}")
-    except Exception as e:                          # noqa: BLE001
-        print(f"  !! nao consegui ler os nomes das abas: {e}")
-        nomes = []
-
-    gids = gids_via_html(sid)
-    print(f"  gids encontrados na pagina: {gids}")
-
-    out: dict[str, list[list[str]]] = {}
-    for gid in gids:
-        rows = csv_rows(sid, gid)
-        if rows is None:
-            continue
-        hdr = rows[0] if rows else []
-        n = max(0, len(rows) - 1)
-        out[gid] = rows
-        print(f"    gid={gid:>12}  linhas={n:<6} colunas={len(hdr):<4} header[:6]={hdr[:6]}")
-    return out
-
-
-def escolher(mapa: dict[str, list[list[str]]], nome_alvo: str | None,
-             nomes_abas: list[str]) -> tuple[str, list[list[str]]]:
-    """Escolhe o gid da aba desejada: casa pelo nome quando da, senao o maior."""
-    if nome_alvo:
-        for gid, rows in mapa.items():
-            hdr = [norm(h) for h in (rows[0] if rows else [])]
-            if any(nome_alvo in h for h in hdr):
-                return gid, rows
-    # heuristica: a aba de dados e a que tem mais linhas
-    gid = max(mapa, key=lambda g: len(mapa[g]))
-    return gid, mapa[gid]
-
-
-def dump_header(rotulo: str, rows: list[list[str]]) -> None:
-    hdr = rows[0] if rows else []
-    print(f"\n--- {rotulo}: {len(hdr)} colunas, {max(0, len(rows)-1)} linhas de dados ---")
-    for i, h in enumerate(hdr):
-        print(f"    [{i:>2}] {h!r}")
-    print("  amostra (ate 3 linhas, cada celula truncada em 40 chars):")
-    for row in rows[1:4]:
-        print("    " + " | ".join(head(str(c), 40) for c in row[:20]))
-
-
-def distintos(rows: list[list[str]], idx: int | None, rotulo: str, limite: int = 40) -> Counter:
-    c: Counter = Counter()
-    if idx is None:
-        print(f"  {rotulo}: coluna ausente")
-        return c
-    for row in rows[1:]:
-        v = (row[idx] if idx < len(row) else "").strip()
-        if v:
-            c[v] += 1
-    print(f"  {rotulo}: {len(c)} valores distintos")
-    for v, n in c.most_common(limite):
-        print(f"      {n:>5}x  {v!r}")
+def cnt(rs, i, rot, lim=30):
+    c = Counter((r[i] if i < len(r) else "").strip() for r in rs[1:])
+    del c[""]
+    print(f"  {rot}: {len(c)} distintos")
+    for v, n in c.most_common(lim):
+        print(f"      {n:>4}x  {v!r}")
     return c
 
 
-def col(hdr: list[str], *nomes: str) -> int | None:
-    hn = [norm(h) for h in hdr]
-    for nome in nomes:
-        a = norm(nome)
-        for i, h in enumerate(hn):
-            if h == a:
-                return i
-    for nome in nomes:                              # 2a passada: substring
-        a = norm(nome)
-        for i, h in enumerate(hn):
-            if a and a in h:
-                return i
-    return None
+def datas(rs, i):
+    ds = sorted({(r[i] if i < len(r) else "")[:10] for r in rs[1:] if (r[i] if i < len(r) else "").strip()})
+    return (ds[0], ds[-1], len(ds)) if ds else ("-", "-", 0)
 
 
-def main() -> int:
-    meta_mapa = mapear_planilha("PLANILHA META ADS", META_ID)
-    sales_mapa = mapear_planilha("PLANILHA COMPRADORES", SALES_ID)
-    if not meta_mapa or not sales_mapa:
-        print("\n!! nao consegui ler alguma das planilhas — confira se estao "
-              "compartilhadas como 'qualquer pessoa com o link pode ver'.")
-        return 1
+# ---------------- META ----------------
+m = rows(META_ID, "0")
+mh = m[0]
+print("=" * 78, "\nMETA ADS — periodo e quebra por SIGLA DE FUNIL\n", "=" * 78, sep="")
+d0, d1, nd = datas(m, 0)
+print(f"  periodo: {d0} .. {d1}  ({nd} dias distintos)   linhas={len(m)-1}")
+por_sigla: dict[str, dict] = defaultdict(lambda: {"linhas": 0, "gasto": 0.0, "camps": set()})
+for r in m[1:]:
+    camp = (r[1] if len(r) > 1 else "").strip()
+    if not camp:
+        continue
+    sigla = camp.split("|")[0].strip()
+    b = por_sigla[sigla]
+    b["linhas"] += 1
+    b["gasto"] += num(r[8] if len(r) > 8 else "")
+    b["camps"].add(camp)
+print(f"\n  {'sigla':<8}{'linhas':>8}{'gasto R$':>13}  campanhas")
+for s, b in sorted(por_sigla.items(), key=lambda kv: -kv[1]["gasto"]):
+    print(f"  {s:<8}{b['linhas']:>8}{b['gasto']:>13,.2f}  {len(b['camps'])}")
+    for c in sorted(b["camps"]):
+        print(f"           - {c}")
+gasto_total = sum(b["gasto"] for b in por_sigla.values())
+print(f"\n  GASTO TOTAL no periodo: R$ {gasto_total:,.2f}")
 
-    meta_gid, meta_rows = escolher(meta_mapa, "campaign", [])
-    sales_gid, sales_rows = escolher(sales_mapa, None, [])
+ads_meta = {norm(r[3]) for r in m[1:] if len(r) > 3 and r[3].strip()}
+camps_meta = {norm(r[1]) for r in m[1:] if len(r) > 1 and r[1].strip()}
+# sigla -> ad names
+ads_por_sigla = defaultdict(set)
+for r in m[1:]:
+    if len(r) > 3 and r[1].strip():
+        ads_por_sigla[r[1].split("|")[0].strip()].add(r[3].strip())
 
-    # a aba pedida e "Novas Vendas": tenta casar por nome de aba->gid via xlsx
-    print(f"\n>>> GID escolhido para META ADS   : {meta_gid}")
-    print(f">>> GID escolhido para COMPRADORES: {sales_gid}  (verificar se e a aba 'Novas Vendas')")
+# ---------------- COMPRADORES: as duas abas ----------------
+for gid, nome in ((GID_VENDAS, "Vendas (gid 0)"), (GID_NOVAS, "Novas Vendas (gid 659512725)")):
+    s = rows(SALES_ID, gid)
+    sh = s[0]
+    print("\n" + "=" * 78, f"\nCOMPRADORES — aba {nome}: {len(s)-1} linhas, {len(sh)} colunas\n", "=" * 78, sep="")
+    d0, d1, nd = datas(s, 4)
+    print(f"  periodo (col 'Data'): {d0} .. {d1}  ({nd} dias)")
+    cnt(s, 1, "PRODUTO")
+    cnt(s, 11, "STATUS")
+    cnt(s, 12, "CANAL", 10)
+    cnt(s, 14, "utm_source", 10)
+    fat = sum(num(r[8]) for r in s[1:] if len(r) > 8)
+    fat_ok = sum(num(r[8]) for r in s[1:] if len(r) > 11 and norm(r[11]) == "approved")
+    print(f"  Faturamento (col 8): total R$ {fat:,.2f} | so 'approved' R$ {fat_ok:,.2f}")
+    print(f"  Ticket medio (approved): R$ {fat_ok / max(1, sum(1 for r in s[1:] if len(r) > 11 and norm(r[11]) == 'approved')):,.2f}")
 
-    dump_header("META ADS", meta_rows)
-    dump_header("COMPRADORES", sales_rows)
-
-    mh = meta_rows[0]
-    i_camp = col(mh, "campaign name", "campaign")
-    i_adset = col(mh, "ad set name", "ad set", "adset")
-    i_ad = col(mh, "ad name")
-    print("\n===== META ADS: valores distintos =====")
-    camps = distintos(meta_rows, i_camp, "Campaign Name")
-    adsets = distintos(meta_rows, i_adset, "Ad Set Name", 25)
-    ads = distintos(meta_rows, i_ad, "Ad Name", 40)
-
-    sh = sales_rows[0]
-    print("\n===== COMPRADORES: valores distintos =====")
-    i_prod = col(sh, "produto", "product")
-    distintos(sales_rows, i_prod, "PRODUTO")
-    i_status = col(sh, "status")
-    distintos(sales_rows, i_status, "STATUS", 20)
-
-    print("\n  colunas candidatas a RECEITA:")
-    for i, h in enumerate(sh):
-        if any(k in norm(h) for k in ("faturamento", "valor", "preco", "amount", "value", "receita", "total")):
-            amostra = [ (r[i] if i < len(r) else "") for r in sales_rows[1:6] ]
-            print(f"      [{i:>2}] {h!r}  amostra={amostra}")
-
-    # ---------- cruzamento UTM x Meta (define AD_UTM_COLUMN) ----------
-    print(f"\n{'='*78}\nCRUZAMENTO UTM x META  (define AD_UTM_COLUMN)\n{'='*78}")
-    alvos = {"Campaign Name": {norm(v) for v in camps},
-             "Ad Set Name": {norm(v) for v in adsets},
-             "Ad Name": {norm(v) for v in ads}}
-    print(f"{'coluna UTM':<16}{'preench.':>9} | " + " | ".join(f"{k:>14}" for k in alvos))
-    print("-" * 78)
-    achou_utm = False
-    for utm in ("utm_campaign", "utm_medium", "utm_term", "utm_content", "utm_source"):
-        i = col(sh, utm, utm.replace("_", " "))
-        if i is None:
-            print(f"{utm:<16}{'AUSENTE':>9} |")
-            continue
-        achou_utm = True
-        vals = [(r[i] if i < len(r) else "").strip() for r in sales_rows[1:]]
+    print("\n  --- cruzamento UTM x META nesta aba ---")
+    for j, utm, alvo, rot in ((17, "utm_campaign", camps_meta, "Campaign Name"),
+                              (18, "utm_content", ads_meta, "Ad Name"),
+                              (16, "utm_term", ads_meta, "Ad Name")):
+        vals = [(r[j] if j < len(r) else "").strip() for r in s[1:]]
         vals = [v for v in vals if v]
-        linha = f"{utm:<16}{len(vals):>9} | "
-        linha += " | ".join(f"{sum(1 for v in vals if norm(v) in alvo):>14}" for alvo in alvos.values())
-        print(linha)
-        print(f"    amostra {utm}: {sorted({v for v in vals})[:6]}")
-    if not achou_utm:
-        print("  !! nenhuma coluna utm_* encontrada na planilha de Compradores.")
+        hit = sum(1 for v in vals if norm(v) in alvo)
+        print(f"    {utm:<14} preenchidas={len(vals):>4}  casam com {rot}: {hit}")
+    # match completo campanha+anuncio (o que o build.py exige)
+    par = 0
+    pares_meta = {(norm(r[1]), norm(r[3])) for r in m[1:] if len(r) > 3}
+    for r in s[1:]:
+        c_ = norm(r[17] if len(r) > 17 else "")
+        a_ = norm(r[18] if len(r) > 18 else "")
+        if (c_, a_) in pares_meta:
+            par += 1
+    print(f"    match COMPLETO (utm_campaign + utm_content) com o Meta: {par} de {len(s)-1} linhas")
+    # produtos x sigla da campanha
+    print("\n  --- PRODUTO x sigla da utm_campaign ---")
+    tab = defaultdict(Counter)
+    for r in s[1:]:
+        prod = (r[1] if len(r) > 1 else "").strip() or "(sem produto)"
+        uc = (r[17] if len(r) > 17 else "").strip()
+        sig = uc.split("|")[0].strip() if "|" in uc else ("(sem utm)" if not uc else uc[:22])
+        tab[prod][sig] += 1
+    for prod, c in tab.items():
+        print(f"    {prod!r}: {dict(c.most_common(6))}")
 
-    print("\n>>> Leia a tabela: a coluna UTM que carrega o Ad Name e a que bate")
-    print(">>> quase 100% na coluna 'Ad Name'. Casar pela errada zera a atribuicao.")
-    return 0
-
-
-if __name__ == "__main__":
-    sys.exit(main())
+print("\n\nANUNCIOS POR SIGLA (Meta):")
+for s_, a in ads_por_sigla.items():
+    print(f"  {s_}: {sorted(a)}")
