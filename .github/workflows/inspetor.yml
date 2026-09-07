@@ -1,6 +1,7 @@
-# WORKFLOW TEMPORARIO — sera removido depois de mapear as planilhas do cliente
-# novo. Roda no runner (que alcanca docs.google.com) e imprime no log as abas,
-# gids, colunas e o cruzamento UTM x Meta. Somente leitura das planilhas.
+# WORKFLOW TEMPORARIO — valida o build do repo novo (dash-marlon-mattedi) antes
+# do repositorio existir. Roda no runner, que alcanca docs.google.com (o sandbox
+# do agente nao alcanca — CLAUDE.md, problema conhecido #4).
+# Sera removido junto com tools/ quando o repo novo estiver no ar.
 name: Inspetor de Planilhas (temporario)
 
 on:
@@ -8,19 +9,58 @@ on:
   push:
     branches: [ claude/dash-marlon-mattedi-setup-k6dral ]
     paths:
-      - "tools/inspetor.py"
+      - "tools/**"
       - ".github/workflows/inspetor.yml"
 
 permissions:
   contents: read
 
 jobs:
-  inspecionar:
+  validar-build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: Mapear planilhas do cliente
-        run: python tools/inspetor.py
+
+      - name: Build do dashboard MARLON MATTEDI (le as planilhas, somente leitura)
+        run: |
+          python tools/marlon-staging/build/build.py \
+            --template tools/marlon-staging/build/template.html \
+            --out dist/index.html
+
+      - name: Conferir a saida gerada
+        run: |
+          set -e
+          echo "=== tamanho ==="
+          ls -la dist/index.html
+          python - <<'PY'
+          import json, re, pathlib
+          html = pathlib.Path("dist/index.html").read_text(encoding="utf-8")
+          m = re.search(r'id="__DATA__"[^>]*>(.*?)</script>', html, re.S)
+          if not m:
+              m = re.search(r'const\s+DATA\s*=\s*(\{.*?\});', html, re.S)
+          data = json.loads(m.group(1))
+          meta, sales = data.get("meta", []), data.get("sales", [])
+          print(f"registros meta  : {len(meta)}")
+          print(f"registros sales : {len(sales)}")
+          print(f"cliente         : {data.get('client_name')} / {data.get('client_sub')}")
+          print(f"produto         : {data.get('main_product')}")
+          gasto = sum(r.get("sp", 0) for r in meta)
+          print(f"gasto total     : R$ {gasto:,.2f}")
+          fat = sum(r.get("v", 0) for r in sales)
+          print(f"faturamento     : R$ {fat:,.2f}")
+          atrib = sum(1 for r in sales if r.get("meta"))
+          print(f"vendas casadas com o Meta : {atrib}")
+          assert meta,  "ERRO: nenhum registro do Meta Ads"
+          assert sales, "ERRO: nenhuma venda (is_paid pode ter descartado tudo)"
+          assert atrib, "ERRO: nenhuma venda atribuida ao Meta (AD_UTM_COLUMN errado?)"
+          print("\nOK: build valido.")
+          PY
+
+      - name: Publicar o HTML como artifact (para inspecao)
+        uses: actions/upload-artifact@v4
+        with:
+          name: dashboard-marlon-preview
+          path: dist/index.html
