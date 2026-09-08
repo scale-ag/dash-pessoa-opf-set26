@@ -3,7 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- cache-bust: pagina nunca servida de cache; dados mudam a cada 30 min -->
+<!-- Estas metatags NAO controlam o cache HTTP (o navegador decide pelos cabecalhos
+     da resposta, e no GitHub Pages nao da para definir cabecalho). Ficam por
+     compatibilidade. Quem resolve dados velhos em tela e o checador de versao do
+     app.js, que compara <meta name="build"> com fetch cache:'no-store'. -->
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">

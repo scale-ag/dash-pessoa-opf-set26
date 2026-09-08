@@ -309,7 +309,22 @@ Teste local:
    persistência é no Worker (KV) — ver seção "IA Insights" acima; confirme que
    `IA_WORKER_URL` está preenchido em `build/config.py` e que o log do deploy do Worker
    não mostrou o aviso de KV sem permissão.
-8. **Venda não aparece na aba Meta Ads (ou aparece na campanha errada):** confirme
+9. **"A dash trava" / "não atualiza":** o build roda a cada 30 min e publica normalmente
+   — confira em Actions antes de suspeitar do pipeline. Duas causas reais, ambas já
+   corrigidas em `build/app.js`:
+   - *Travar*: a versão antiga fazia `location.href=...` a cada 30 min, recarregando a
+     página por cima do usuário. Filtros, seleção de campanha/anúncio e rolagem eram
+     perdidos no meio da análise (parece travamento) e cada recarga empilhava uma
+     entrada no histórico. Agora a página **não recarrega sozinha**: ela consulta a
+     versão publicada e mostra um aviso "Novos dados publicados · Atualizar agora".
+   - *Não atualizar*: as metatags `http-equiv="Cache-Control"` do `<head>` **não
+     controlam o cache HTTP** — quem decide são os cabeçalhos da resposta, e no GitHub
+     Pages não dá para defini-los. Abrir a URL "pelada" podia entregar uma cópia de
+     cache mesmo com build novo publicado. O checador resolve isso comparando
+     `<meta name="build">` (buscado com `cache:'no-store'`) com o `build_id` carregado.
+   Para conferir qual build está na tela: rodapé do menu lateral (`build ...`) e
+   "Última atualização" na topbar.
+10. **Venda não aparece na aba Meta Ads (ou aparece na campanha errada):** confirme
    qual coluna UTM da planilha do cliente carrega o identificador real do anúncio do
    Meta (`Ad Name`) e ajuste `AD_UTM_COLUMN` em `build/config.py`. **Não assuma pela
    convenção** — nos dados deste cliente é `utm_term`, e o `utm_content` traz o

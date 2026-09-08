@@ -804,7 +804,7 @@ document.getElementById('periodPop').addEventListener('click',e=>e.stopPropagati
 document.addEventListener('click',()=>{ if(ppIsOpen()) ppClose(); });
 document.addEventListener('keydown',e=>{ if(e.key==='Escape'&&ppIsOpen()) ppClose(); });
 document.getElementById('clearBtn').addEventListener('click',()=>{ STATE.mSelC.clear();STATE.mSelA.clear();STATE.mSelAd.clear();STATE.selDays.clear(); applyPreset('mes'); });
-document.getElementById('refreshBtn').addEventListener('click',function(){ this.classList.add('loading'); location.href=location.pathname+'?t='+Date.now()+location.hash; });
+document.getElementById('refreshBtn').addEventListener('click',function(){ this.classList.add('loading'); goRefresh(); });
 
 /* IA Insights config + geração */
 document.getElementById('iaCfgBtn').addEventListener('click',()=>{ const c=document.getElementById('iaConfig');
@@ -835,6 +835,51 @@ syncDateInputs(); iaStatusText();
 document.getElementById('taxToggle').classList.toggle('on', STATE.tax);  /* imposto Meta ON por padrão */
 setPage(location.hash==='#meta'?'meta':(location.hash==='#rel'?'rel':(location.hash==='#ia'?'ia':'geral')));
 
-/* auto-refresh com cache-bust ~30 min */
-setTimeout(()=>{ location.href=location.pathname+'?t='+Date.now()+location.hash; }, 30*60*1000);
+/* ---------------- Aviso de nova versão (sem recarregar por cima do usuário) ----------------
+   O build publica uma versão nova a cada ~30 min, mas o GitHub Pages serve o HTML
+   com Cache-Control próprio (as metatags http-equiv do <head> NÃO controlam o cache
+   HTTP), então abrir a URL "pelada" pode entregar uma cópia antiga.
+
+   Em vez de recarregar a página sozinho — o que apagava filtros, seleção e rolagem no
+   meio do uso, e empilhava uma entrada no histórico a cada 30 min —, aqui a página
+   CONSULTA a versão publicada com cache:'no-store' e, se houver build novo, mostra um
+   aviso discreto. Quem decide a hora de atualizar é o usuário. */
+const UPD_CHECK_MS = 5*60*1000;   /* consulta a cada 5 min (a página tem ~35 KB) */
+let updPending = false;
+
+function goRefresh(){
+  /* replace() em vez de href: não empilha histórico a cada atualização */
+  location.replace(location.pathname+'?t='+Date.now()+location.hash);
+}
+
+function updShowBanner(){
+  if(updPending || document.getElementById('updBanner')) return;
+  updPending = true;
+  const el = document.createElement('div');
+  el.id = 'updBanner';
+  el.innerHTML = '<span>Novos dados publicados.</span>'
+               + '<button class="btn primary" id="updNow">Atualizar agora</button>'
+               + '<button class="btn" id="updLater" title="Continuar nesta versão">Depois</button>';
+  document.body.appendChild(el);
+  document.getElementById('updNow').addEventListener('click', goRefresh);
+  document.getElementById('updLater').addEventListener('click', ()=>{ el.remove(); });
+}
+
+async function updCheck(){
+  if(updPending || document.hidden) return;
+  try{
+    const r = await fetch(location.pathname+'?v='+Date.now(), {cache:'no-store'});
+    if(!r.ok) return;
+    const html = await r.text();
+    const m = html.match(/<meta\s+name="build"\s+content="([^"]+)"/i);
+    if(m && B.build_id && m[1] !== B.build_id) updShowBanner();
+  }catch(e){ /* offline ou falha de rede: tenta de novo no próximo ciclo */ }
+}
+
+setInterval(updCheck, UPD_CHECK_MS);
+/* uma checagem logo após abrir: se o Pages entregou uma cópia de cache, o usuário
+   descobre em segundos em vez de ficar olhando número velho sem saber */
+setTimeout(updCheck, 15*1000);
+/* e ao voltar para a aba, que é quando a pessoa vai de fato olhar os números */
+document.addEventListener('visibilitychange', ()=>{ if(!document.hidden) updCheck(); });
 
