@@ -1,6 +1,6 @@
 {
-  "gerado_em": "01/10/2026 06:26",
-  "hoje": "2026-10-01",
+  "gerado_em": "02/10/2026 06:02",
+  "hoje": "2026-10-02",
   "periodo_dados": {
     "de": "2026-08-13",
     "ate": "2026-09-19"
@@ -12,6 +12,55 @@
   "ticket_medio_geral": 23.48,
   "periodos": {
     "hoje": {
+      "de": "2026-10-02",
+      "ate": "2026-10-02",
+      "total": {
+        "gasto": 0.0,
+        "impr": 0.0,
+        "cliques": 0.0,
+        "pv": 0.0,
+        "ck": 0.0,
+        "vendas": 0,
+        "fat": 0.0,
+        "cpm": null,
+        "ctr": null,
+        "cpc": null,
+        "cpv": null,
+        "cr": null,
+        "cpic": null,
+        "vischk": null,
+        "convchk": null,
+        "convlp": null,
+        "cac": null,
+        "roas": null,
+        "ticket": null
+      },
+      "ads": {
+        "gasto": 0.0,
+        "impr": 0.0,
+        "cliques": 0.0,
+        "pv": 0.0,
+        "ck": 0.0,
+        "vendas": 0,
+        "fat": 0.0,
+        "cpm": null,
+        "ctr": null,
+        "cpc": null,
+        "cpv": null,
+        "cr": null,
+        "cpic": null,
+        "vischk": null,
+        "convchk": null,
+        "convlp": null,
+        "cac": null,
+        "roas": null,
+        "ticket": null
+      },
+      "campanhas": [],
+      "top_anuncios": [],
+      "piores_anuncios": []
+    },
+    "ontem": {
       "de": "2026-10-01",
       "ate": "2026-10-01",
       "total": {
@@ -60,58 +109,9 @@
       "top_anuncios": [],
       "piores_anuncios": []
     },
-    "ontem": {
-      "de": "2026-09-30",
-      "ate": "2026-09-30",
-      "total": {
-        "gasto": 0.0,
-        "impr": 0.0,
-        "cliques": 0.0,
-        "pv": 0.0,
-        "ck": 0.0,
-        "vendas": 0,
-        "fat": 0.0,
-        "cpm": null,
-        "ctr": null,
-        "cpc": null,
-        "cpv": null,
-        "cr": null,
-        "cpic": null,
-        "vischk": null,
-        "convchk": null,
-        "convlp": null,
-        "cac": null,
-        "roas": null,
-        "ticket": null
-      },
-      "ads": {
-        "gasto": 0.0,
-        "impr": 0.0,
-        "cliques": 0.0,
-        "pv": 0.0,
-        "ck": 0.0,
-        "vendas": 0,
-        "fat": 0.0,
-        "cpm": null,
-        "ctr": null,
-        "cpc": null,
-        "cpv": null,
-        "cr": null,
-        "cpic": null,
-        "vischk": null,
-        "convchk": null,
-        "convlp": null,
-        "cac": null,
-        "roas": null,
-        "ticket": null
-      },
-      "campanhas": [],
-      "top_anuncios": [],
-      "piores_anuncios": []
-    },
     "3d": {
-      "de": "2026-09-29",
-      "ate": "2026-10-01",
+      "de": "2026-09-30",
+      "ate": "2026-10-02",
       "total": {
         "gasto": 0.0,
         "impr": 0.0,
@@ -159,8 +159,8 @@
       "piores_anuncios": []
     },
     "7d": {
-      "de": "2026-09-25",
-      "ate": "2026-10-01",
+      "de": "2026-09-26",
+      "ate": "2026-10-02",
       "total": {
         "gasto": 0.0,
         "impr": 0.0,
@@ -208,8 +208,8 @@
       "piores_anuncios": []
     },
     "14d": {
-      "de": "2026-09-18",
-      "ate": "2026-10-01",
+      "de": "2026-09-19",
+      "ate": "2026-10-02",
       "total": {
         "gasto": 0.0,
         "impr": 0.0,
@@ -274,36 +274,14 @@
           "cac": null,
           "roas": null,
           "ticket": null
-        },
-        {
-          "nome": "OPF-SET26 | E4-VEN | P1-QUENTE | VND | ABO | 2026-09-10 | Corredor polones",
-          "gasto": 0.0,
-          "impr": 0.0,
-          "cliques": 0.0,
-          "pv": 0.0,
-          "ck": 0.0,
-          "vendas": 0,
-          "fat": 0.0,
-          "cpm": null,
-          "ctr": null,
-          "cpc": null,
-          "cpv": null,
-          "cr": null,
-          "cpic": null,
-          "vischk": null,
-          "convchk": null,
-          "convlp": null,
-          "cac": null,
-          "roas": null,
-          "ticket": null
         }
       ],
       "top_anuncios": [],
       "piores_anuncios": []
     },
     "30d": {
-      "de": "2026-09-02",
-      "ate": "2026-10-01",
+      "de": "2026-09-03",
+      "ate": "2026-10-02",
       "total": {
         "gasto": 1745.45,
         "impr": 72180.0,
@@ -513,7 +491,7 @@
     },
     "mes": {
       "de": "2026-10-01",
-      "ate": "2026-10-01",
+      "ate": "2026-10-02",
       "total": {
         "gasto": 0.0,
         "impr": 0.0,
