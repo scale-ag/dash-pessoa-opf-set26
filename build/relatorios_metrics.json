@@ -1,6 +1,6 @@
 {
-  "gerado_em": "28/10/2026 06:01",
-  "hoje": "2026-10-28",
+  "gerado_em": "29/10/2026 05:57",
+  "hoje": "2026-10-29",
   "periodo_dados": {
     "de": "2026-08-13",
     "ate": "2026-09-19"
@@ -12,6 +12,55 @@
   "ticket_medio_geral": 23.48,
   "periodos": {
     "hoje": {
+      "de": "2026-10-29",
+      "ate": "2026-10-29",
+      "total": {
+        "gasto": 0.0,
+        "impr": 0.0,
+        "cliques": 0.0,
+        "pv": 0.0,
+        "ck": 0.0,
+        "vendas": 0,
+        "fat": 0.0,
+        "cpm": null,
+        "ctr": null,
+        "cpc": null,
+        "cpv": null,
+        "cr": null,
+        "cpic": null,
+        "vischk": null,
+        "convchk": null,
+        "convlp": null,
+        "cac": null,
+        "roas": null,
+        "ticket": null
+      },
+      "ads": {
+        "gasto": 0.0,
+        "impr": 0.0,
+        "cliques": 0.0,
+        "pv": 0.0,
+        "ck": 0.0,
+        "vendas": 0,
+        "fat": 0.0,
+        "cpm": null,
+        "ctr": null,
+        "cpc": null,
+        "cpv": null,
+        "cr": null,
+        "cpic": null,
+        "vischk": null,
+        "convchk": null,
+        "convlp": null,
+        "cac": null,
+        "roas": null,
+        "ticket": null
+      },
+      "campanhas": [],
+      "top_anuncios": [],
+      "piores_anuncios": []
+    },
+    "ontem": {
       "de": "2026-10-28",
       "ate": "2026-10-28",
       "total": {
@@ -60,58 +109,9 @@
       "top_anuncios": [],
       "piores_anuncios": []
     },
-    "ontem": {
-      "de": "2026-10-27",
-      "ate": "2026-10-27",
-      "total": {
-        "gasto": 0.0,
-        "impr": 0.0,
-        "cliques": 0.0,
-        "pv": 0.0,
-        "ck": 0.0,
-        "vendas": 0,
-        "fat": 0.0,
-        "cpm": null,
-        "ctr": null,
-        "cpc": null,
-        "cpv": null,
-        "cr": null,
-        "cpic": null,
-        "vischk": null,
-        "convchk": null,
-        "convlp": null,
-        "cac": null,
-        "roas": null,
-        "ticket": null
-      },
-      "ads": {
-        "gasto": 0.0,
-        "impr": 0.0,
-        "cliques": 0.0,
-        "pv": 0.0,
-        "ck": 0.0,
-        "vendas": 0,
-        "fat": 0.0,
-        "cpm": null,
-        "ctr": null,
-        "cpc": null,
-        "cpv": null,
-        "cr": null,
-        "cpic": null,
-        "vischk": null,
-        "convchk": null,
-        "convlp": null,
-        "cac": null,
-        "roas": null,
-        "ticket": null
-      },
-      "campanhas": [],
-      "top_anuncios": [],
-      "piores_anuncios": []
-    },
     "3d": {
-      "de": "2026-10-26",
-      "ate": "2026-10-28",
+      "de": "2026-10-27",
+      "ate": "2026-10-29",
       "total": {
         "gasto": 0.0,
         "impr": 0.0,
@@ -159,8 +159,8 @@
       "piores_anuncios": []
     },
     "7d": {
-      "de": "2026-10-22",
-      "ate": "2026-10-28",
+      "de": "2026-10-23",
+      "ate": "2026-10-29",
       "total": {
         "gasto": 0.0,
         "impr": 0.0,
@@ -208,8 +208,8 @@
       "piores_anuncios": []
     },
     "14d": {
-      "de": "2026-10-15",
-      "ate": "2026-10-28",
+      "de": "2026-10-16",
+      "ate": "2026-10-29",
       "total": {
         "gasto": 0.0,
         "impr": 0.0,
@@ -257,8 +257,8 @@
       "piores_anuncios": []
     },
     "30d": {
-      "de": "2026-09-29",
-      "ate": "2026-10-28",
+      "de": "2026-09-30",
+      "ate": "2026-10-29",
       "total": {
         "gasto": 0.0,
         "impr": 0.0,
@@ -307,7 +307,7 @@
     },
     "mes": {
       "de": "2026-10-01",
-      "ate": "2026-10-28",
+      "ate": "2026-10-29",
       "total": {
         "gasto": 0.0,
         "impr": 0.0,
@@ -528,6 +528,13 @@
       ],
       "piores_anuncios": [
         {
+          "nome": "EST23",
+          "gasto": 2.3,
+          "vendas": 0,
+          "cac": null,
+          "roas": 0.0
+        },
+        {
           "nome": "EST25",
           "gasto": 2.12,
           "vendas": 0,
@@ -542,22 +549,15 @@
           "roas": 0.0
         },
         {
-          "nome": "EST23",
-          "gasto": 2.3,
+          "nome": "CP01",
+          "gasto": 31.9,
           "vendas": 0,
           "cac": null,
           "roas": 0.0
         },
         {
-          "nome": "CP14",
-          "gasto": 3.62,
-          "vendas": 0,
-          "cac": null,
-          "roas": 0.0
-        },
-        {
-          "nome": "CP05",
-          "gasto": 9.34,
+          "nome": "CP02",
+          "gasto": 11.97,
           "vendas": 0,
           "cac": null,
           "roas": 0.0
@@ -738,6 +738,13 @@
       ],
       "piores_anuncios": [
         {
+          "nome": "EST23",
+          "gasto": 2.3,
+          "vendas": 0,
+          "cac": null,
+          "roas": 0.0
+        },
+        {
           "nome": "EST25",
           "gasto": 2.12,
           "vendas": 0,
@@ -752,22 +759,15 @@
           "roas": 0.0
         },
         {
-          "nome": "EST23",
-          "gasto": 2.3,
+          "nome": "CP01",
+          "gasto": 31.9,
           "vendas": 0,
           "cac": null,
           "roas": 0.0
         },
         {
-          "nome": "CP14",
-          "gasto": 3.62,
-          "vendas": 0,
-          "cac": null,
-          "roas": 0.0
-        },
-        {
-          "nome": "CP05",
-          "gasto": 9.34,
+          "nome": "CP02",
+          "gasto": 11.97,
           "vendas": 0,
           "cac": null,
           "roas": 0.0
